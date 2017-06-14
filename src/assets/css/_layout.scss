@@ -1,0 +1,79 @@
+/* Header
+   ========================================================================== */
+.ly_header {
+  padding-top: 15px;
+
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  background-color: #fff;
+
+  a:link{
+    color: $txtColor;
+  }
+
+  &_inner{
+    @include contentCentering();
+  }
+}
+
+/* Body
+   ========================================================================== */
+.ly_body{
+  @include contentCentering();
+  @include lastMB0();
+
+  > .bl_sect02:last-child{
+    border-bottom: none;
+  }
+}
+
+/* Footer
+   ========================================================================== */
+
+.ly_footer {
+  padding-top: autoSpace(50, false, $fz__small);
+  padding-bottom: autoSpace(65, false, $fz__small);
+  font-size: $fz__small;
+  @include MQ(md){
+    padding-top: 0;
+    padding-bottom: autoSpace(95, false, $sp_fz__xxxLarge, $sp_lh);
+    font-size: $sp_fz__xxxLarge;
+  }
+
+  &_inner{
+    @include contentCentering();
+    @include MQ(md){
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  a:link{
+    color: $txtColor;
+  }
+}
+
+/* Others
+   ========================================================================== */
+.ly_pageTop{
+  $this: #{&};
+  position: fixed;
+  z-index: 9999;
+  bottom: 15px;
+  right: 15px;
+  width: 60px;
+  height: 60px;
+  @include FHA{
+    opacity: 1;
+    opacity: $hoverOpacity;
+  }
+  &.is_end{
+    opacity: 1;
+    @include FHA{
+      opacity: $hoverOpacity;
+    }
+  }
+}

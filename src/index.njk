@@ -1,0 +1,24 @@
+{% set inc_path = './_inc/' %}
+{% set page = {
+  title: 'トップ'
+} %}
+
+{% extends inc_path + "_base.njk" %}
+
+{#{%- set unique_head = '' %}#}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+  {{ super() }}
+  <div class="ly_body">
+    content here
+  </div>
+  <!-- /.ly_body -->
+{% endblock %}
+
+{#{%- set unique_footer = '' %}#}
+{% block footer %}
+  {{ super() }}
+{% endblock %}

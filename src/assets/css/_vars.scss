@@ -1,0 +1,149 @@
+// -------------------------------------------------------------------
+// Variables
+// -------------------------------------------------------------------
+
+// General
+// -------------------------------------------------------------------
+
+// $fileRoot: '';
+$fileRoot: '';
+$assetsRoot: $fileRoot + '/assets';
+$breakpoint: 750;
+$contSpaceValue: 15;
+$contSpace: $contSpaceValue + px;
+$contWidthValue: 1080 + $contSpaceValue * 2;
+$contWidth: $contWidthValue + px;
+
+//
+//Media-query
+//
+$breakpoints: (
+  'md': 'screen and (max-width: #{$breakpoint}px)',
+  'md__rev': 'screen and (min-width: #{$breakpoint + 1}px)',
+);
+
+
+// Color
+// -------------------------------------------------------------------
+$themeColor: #13007c;
+$themeColor__dark: #0d0071;
+$accentColor: #ef711d;
+$baseColor: #f1f3f5;
+$lightBlue: #d7e5f7;
+$lightGray: #f8f9fa;
+$darkGray: #9e9e9e;
+
+
+//Others
+$horizLIneColor: #e0e0e0;
+$borderColor: #e1e1e1;
+
+//Header
+$headerSparetor: $borderColor;
+$headerPulldownBack: #f2f3f5;
+$headerPullDownBorder: #cdd4d9;
+$sp_headerNavBack: #e5e9eb;
+
+
+//Footer
+$footerBorderColor: #9f9f9f;
+$footerBack: #e5e8eb;
+
+
+
+// Space
+// -------------------------------------------------------------------
+$sectSpaceValue: 80;
+$sectSpace: $sectSpaceValue + px;
+$sp_sectSpaceValue: 50;
+$sp_sectSpace: $sp_sectSpaceValue + px;
+$moduleSpaceValue: 70;
+$moduleSpace: $moduleSpaceValue + px;
+$sp_moduleSpaceValue: 40;
+$sp_moduleSpace: $sp_moduleSpaceValue + px;
+
+
+
+// Interaction
+// -------------------------------------------------------------------
+
+//
+//Opacity
+//
+$hoverOpacity: .5;
+
+//
+//Transition
+//
+$transSpeed: .25s;
+
+
+
+// Text
+// -------------------------------------------------------------------
+$txtColor: #212121;
+
+//
+//Font-family
+//
+$ff__sans: "Noto Sans Japanese", sans-serif;
+$ff__serif: "Noto Serif Japanese", serif;
+$ff__en: "Vollkorn", serif;
+
+//
+//Font-size
+//
+$fz__xxSmall: 1.2rem;
+$fz__small: 1.4rem;
+$fz: 1.5rem;
+$fz__xLarge: 1.6rem;
+$fz__xxxLarge: 1.8rem;
+//Title等のサイズ
+$fz__h3: 2.2rem;
+$fz__h2: 2.8rem;
+$fz__h1: 3.4rem;
+//英数字見出し等のサイズ
+$fz__AZ: 3rem;
+//line-height
+$lh: 1.8;
+
+
+//SP
+$sp_fz__xxxxSmall: 1.2rem;
+$sp_fz__xxxSmall: 1.2rem;
+$sp_fz__xSmall: 1.3rem;
+$sp_fz: 1.4rem;
+$sp_fz__xxxLarge: 1.6rem;
+//SP Title等
+$sp_fz__h2__xxSmall: 2.3rem;
+$sp_fz__h2: 2rem;
+$sp_fz__h1: 2.7rem;
+//英数字見出し等のサイズ
+$sp_fz__AZ__small: 2.9rem;
+$sp_fz__AZ: 4.1rem;
+//line-height
+$sp_lh: 1.75;
+
+
+//
+//Font-weight
+//日本語部分はウェブフォントのため、font-weightではなくfont-familyで太さを制御
+//
+$fw: 400;
+$fw__bold: 500;
+
+
+//
+//Text-Shadow
+//
+$txsh: ;
+
+
+// Border
+// -------------------------------------------------------------------
+$border: 1px solid $borderColor;
+
+
+// Box-shadow
+// -------------------------------------------------------------------
+$bxsh: ;

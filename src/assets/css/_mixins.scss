@@ -1,0 +1,119 @@
+// -------------------------------------------------------------------
+// Mixins
+// -------------------------------------------------------------------
+
+// Hover&Active
+// -------------------------------------------------------------------
+@mixin FHA() {
+  #{&}:focus,
+  #{&}:hover,
+  #{&}:active{
+    @content;
+  }
+}
+
+
+// MediaQuaries
+// -------------------------------------------------------------------
+@mixin MQ($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+} @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+// Layouts
+// -------------------------------------------------------------------
+@mixin contentCentering(){
+  max-width: $contWidth;
+  padding-right: $contSpace;
+  padding-left: $contSpace;
+  margin-right: auto;
+  margin-left: auto;
+  @include MQ(md) {
+    max-width: 100%;
+  }
+}
+
+// Text
+// -------------------------------------------------------------------
+@mixin basicTxt($lh: $lh){
+  color: $txtColor;
+  font-family: $ff__sans;
+  font-size: $fz;
+  font-weight: $fw;
+  line-height: $lh;
+  @include MQ(md){
+    font-size: $sp_fz;
+    line-height: $sp_lh;
+  }
+}
+
+@mixin lastPR0(){
+  > *:last-child {
+    padding-right: 0!important;
+  }
+}
+
+@mixin lastPB0(){
+  > *:last-child {
+    padding-bottom: 0!important;
+  }
+}
+
+@mixin lastMR0(){
+  > *:last-child {
+    margin-right: 0!important;
+  }
+}
+
+@mixin lastMB0(){
+  > *:last-child {
+    margin-bottom: 0!important;
+  }
+}
+
+@mixin placeholder {
+    &:placeholder-shown {
+        @content;
+    }
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        opacity: 1;
+        @content;
+    }
+    &::-moz-placeholder {
+        opacity: 1;
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+}
+
+
+@mixin addRightChevron($which:after, $position:30){
+  display: block;
+  position: relative;
+  padding-right: $position + 20px;
+  &:#{$which}{
+    content: "\e901";
+    display: block;
+    width: 8px;
+    height: 20px;
+    position: absolute;
+    right: $position + px;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    font-weight: $fw;
+    font-family: 'icomoon';
+    font-size: 1.25rem;
+  }
+}

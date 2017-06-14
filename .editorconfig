@@ -1,0 +1,12 @@
+root = true                       # プロジェクトのルートディレクトリかどうか
+
+[*]                               # 全てのソースファイルに対して
+end_of_line = lf                  # 改行コードはLF
+charset = utf-8                   # 文字コードはUTF-8
+trim_trailing_whitespace = true   # 行の後ろに空白がある場合、トリミングして詰める
+insert_final_newline = true       # ファイルの末尾を改行文字にする
+indent_style = space              # インデントスタイルはスペース
+indent_size = 2                   # インデントサイズは2
+
+[*.md]                            # 拡張子がmdのファイルに対して
+trim_trailing_whitespace = false  # 行の後ろに空白がある場合、そのままにする

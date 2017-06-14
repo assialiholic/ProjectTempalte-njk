@@ -1,0 +1,34 @@
+// Width/Height
+// -------------------------------------------------------------------
+@function percentToCont($num, $contWidthValue:$contWidthValue) {
+  @return ($num/$contWidthValue) * 100%;
+}
+
+// Padding/Margin
+// -------------------------------------------------------------------
+@function totalPadHeight($pd, $fz:$fz, $lh:$lh){
+  //px変換し、単位を除く値のみを取得
+  $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+  $lh: $fz * $lh;
+  @return ($pd - $lh) / 2 + px;
+}
+
+@function autoSpace($num:0, $continueText:false, $fz:$fz, $lh:$lh){
+  @if not ($num == 0 and $fz == $fz and $lh == $lh){
+    //px変換し、単位を除く値のみを取得
+    $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+    @if ($continueText){
+      @return $num - ($lh * $fz - $fz) + px;
+    } @else {
+      @return $num - (($lh * $fz - $fz)/2) + px;
+    }
+  } @else {
+    @return $num + px;
+  }
+}
+
+//line-heightの半分をネガティブマージンで打ち消す想定
+@function halfLineHeight($fz:$fz, $lh:$lh){
+  $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+  @return (($fz * $lh) - $fz) / 2 + px;
+}

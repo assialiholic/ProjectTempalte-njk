@@ -1,0 +1,630 @@
+/* Title
+   ========================================================================== */
+.bl_pageTtl {
+  position: relative;
+  display: table;
+  width: 100%;
+  height: 200px;
+  background: url(#{$assetsRoot}/img/common/page-ttl-back.png) center center no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  @include MQ(md){
+    height: 106px;
+    background-image: url(#{$assetsRoot}/img/common/page-ttl-back-sp.png);
+    &:after{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      z-index: 5;
+      -webkit-transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
+      display: block;
+      width: 80%;
+      height: 106px;
+      background: url(#{$assetsRoot}/img/common/sphere.png) center center no-repeat;
+      background-size: cover;
+    }
+  }
+
+  .ly_body {
+    position: relative;
+    z-index: 10;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .el_pageTtl{
+    margin-top: 0;
+  }
+}
+
+
+/* Text
+   ========================================================================== */
+.bl_txtBlock {
+  @include lastMB0();
+  margin-bottom: autoSpace(60, true);
+  @include MQ(md){
+    margin-bottom: autoSpace($sp_moduleSpaceValue, $sp_fz, $sp_lh);
+  }
+}
+
+
+/* Img
+   ========================================================================== */
+
+
+/* Other Block
+   ========================================================================== */
+.bl_focalImgUnit{
+  $that: #{&};
+  margin-top: -24px;
+  @include lastMB0();
+
+  .bl_focalImgBlock{
+    float: left;
+    @include MQ(md){
+      font-weight: normal;
+    }
+  }
+
+  &#{$that}__col3{
+    .bl_focalImgBlock{
+      width: percentToCont(344);
+      margin-right: percentToCont(24);
+      &:nth-of-type(3n){
+        margin-right: 0;
+      }
+      @include MQ(md){
+        width: 100%;
+      }
+    }
+  }
+}
+
+.bl_focalImgBlock{
+  $that: #{&};
+  @include lastMB0();
+  margin-top: 24px;
+  @include MQ(md){
+    margin-top: 0;
+    margin-bottom: autoSpace(30, false, $sp_fz, $sp_lh);;
+  }
+
+  > a{
+    display: block;
+    padding-bottom: 20px;
+    border: 2px solid transparent;
+    @include FHA(){
+      text-decoration: none;
+      border-color: $themeColor;
+      #{$that}_img{
+        img {
+          -webkit-transform:  scale(1.1);
+          transform:    scale(1.1);
+        }
+      }
+      #{$that}_desc{
+        &_ttl{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &_img{
+    margin-bottom: autoSpace(25, false, $fz__xxxLarge);
+    background-color: #fff;
+    border: $border;
+    @include MQ(md){
+      margin-bottom: autoSpace(25, false, $sp_fz__xxxLarge, $sp_lh);
+    }
+    img{
+      transition: $transSpeed * 1.5;
+    }
+  }
+
+  &_desc{
+    padding-right: 12px;
+    padding-left: 12px;
+    color: $txtColor;
+    @include MQ(md){
+      padding-right: $contSpace;
+      padding-left: $contSpace;
+    }
+    &_ttl{
+      display: inline-block;
+      font-size: $fz__xxxLarge;
+      font-weight: $fw__bold;
+      @include MQ(md){
+        margin-bottom: autoSpace(20, true, $sp_fz__xxxLarge, $sp_lh);
+        font-size: $sp_fz__xxxLarge;
+      }
+    }
+  }
+}
+
+.bl_cardUnit {
+  $that: #{&};
+  margin-bottom: 30px;
+  @include MQ(md){
+    @include lastMB0();
+    margin-bottom: 20px;
+  }
+
+  .bl_card{
+    float: left;
+    @include MQ(md){
+      float: none;
+    }
+  }
+
+  &#{$that}__col2{
+    .bl_card{
+      width: percentToCont(525);
+      max-width: 525px;
+      margin-right: percentToCont(30);
+      margin-bottom: 30px;
+      @include MQ(md){
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.bl_card {
+  padding: autoSpace(30, $fz__xxxLarge, $lh) 30px autoSpace(30);
+  margin-bottom: $moduleSpace;
+  border: $border;
+  &_ttl{
+    padding-bottom: autoSpace(20, $fz__xxxLarge, $lh);
+    margin-bottom: autoSpace(23);
+    border-bottom: 1px solid $darkGray;
+    font-size: $fz__xxxLarge;
+    font-weight: $fw__bold;
+    vertical-align: top;
+    @include MQ(md){
+      margin-bottom: autoSpace(23, false, $sp_fz, $sp_lh);
+    }
+
+    &_img{
+      float: right;
+      width: 37px;
+    }
+  }
+
+  &_list{
+    $this: #{&};
+    margin-top: - autoSpace(25, true);
+
+    > li{
+      float: left;
+      width: 48%;
+      margin-top: autoSpace(25, true);
+      &:nth-of-type(2n){
+        padding-right: 0;
+        float: right;
+      }
+    }
+
+    &#{$this}__single{
+      > li{
+        float: none;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.bl_contactBlock{
+  padding-top: autoSpace(103, false, $fz__h1);
+  padding-bottom: 83px;
+  background: url(#{$assetsRoot}/img/top/top-contact-back.jpg) center center no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  @include MQ(md){
+    padding-bottom: autoSpace(100, false, $sp_fz, $sp_lh);;
+  }
+
+  &_btn{
+    margin-bottom: autoSpace(23, false, $fz__xLarge);
+  }
+
+  &_info{
+    font-size: $fz__small;
+    @include MQ(md){
+      font-size: $sp_fz__xSmall;
+    }
+
+    &_ttl{
+      display: inline-block;
+      margin-bottom: autoSpace(17, false, $fz__xLarge);
+      font-size: $fz__xLarge;
+      @include MQ(md){
+        margin-bottom: autoSpace(26, false, $sp_fz, $sp_lh);
+        font-size: $sp_fz;
+      }
+    }
+  }
+}
+
+.bl_lightGrayBlock{
+  $that: #{&};
+  @include lastMB0();
+  background-color: $lightGray;
+  padding: autoSpace(35, false, $fz__xxxLarge) 30px 35px;
+
+  &#{$that}__large{
+    padding: autoSpace(35, false, $fz__h3) 30px autoSpace(35);
+  }
+}
+
+
+/* Entry lists
+   ========================================================================== */
+
+.bl_postUnit{
+  @include lastMB0();
+}
+
+.bl_postBlock {
+  @include lastMB0();
+  display: table;
+  width: 100%;
+  padding-bottom: autoSpace(30);
+  margin-bottom: 30px;
+  border-bottom: 1px solid $horizLIneColor;
+  @include MQ(md){
+    padding-bottom: autoSpace(27, false, $sp_fz, $sp_lh);
+    margin-bottom: 27px;
+  }
+
+  &_label{
+    display: table-cell;
+    width: 114px;
+    padding-right: 22px;
+    @include MQ(md){
+      display: inline-block;
+      width: 108px;
+      padding-right: 0;
+      margin-right: 17px;
+      margin-bottom: autoSpace(17, false, $sp_fz, $sp_lh);
+    }
+
+    .el_label {
+      display: block;
+      min-width: 92px;
+      @include MQ(md){
+        min-width: 108px;
+      }
+    }
+  }
+
+  &_date {
+    display: table-cell;
+    width: 94px;
+    font-size: $fz__small;
+    @include MQ(md){
+      display: inline-block;
+      margin-bottom: autoSpace(17, false, $sp_fz, $sp_lh);
+      font-size: $sp_fz__xxxSmall;
+    }
+  }
+  &_txt {
+    display: table-cell;
+    @include MQ(md){
+      display: block;
+    }
+
+    a{
+      color: $txtColor;
+    }
+  }
+}
+
+
+/* Pareto Block
+   ========================================================================== */
+.bl_paretoBlock {
+  $that: #{&};
+  display: table;
+  width: 100%;
+  margin-bottom: 70px;
+  @include MQ(md){
+    display: block;
+    margin-bottom: 50px;
+  }
+
+  &#{$that}__VAT{
+    #{$that}_img,
+    #{$that}_info{
+      vertical-align: top;
+    }
+  }
+
+  &_img {
+    display: table-cell;
+    vertical-align: middle;
+    width: 394px;
+    padding-right: 50px;
+    @include MQ(md){
+      display: block;
+      width: auto;
+      padding-right: 0;
+      margin-bottom: autoSpace(30, false, $sp_fz__xxxLarge, $sp_lh);
+    }
+  }
+
+  &_info {
+    @include lastMB0();
+    display: table-cell;
+    vertical-align: middle;
+    @include MQ(md){
+      display: block;
+    }
+
+    &_txt {
+      margin-bottom: autoSpace(35);
+      @include MQ(md){
+        margin-bottom: autoSpace(27, false, $sp_fz, $sp_lh);
+      }
+
+      dt {
+        margin-bottom: autoSpace(30, true, $fz__xxxLarge);
+        font-size: $fz__xxxLarge;
+        font-weight: $fw__bold;
+        @include MQ(md){
+          margin-bottom: autoSpace(19, true, $sp_fz__xxxLarge, $sp_lh);
+          font-size: $sp_fz__xxxLarge;
+        }
+      }
+
+      dd {
+        line-height: 1.67;
+      }
+    }
+
+    &_btn {
+      @include MQ(md){
+        text-align: center;
+      }
+    }
+  }
+
+}
+
+
+.bl_profBlock{
+  display: table;
+  width: 100%;
+  text-align: right;
+
+  &_txt{
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &_img{
+    display: table-cell;
+    vertical-align: middle;
+    width: 130px;
+    padding-left: 25px;
+  }
+}
+
+
+.bl_timeLineUnit {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    bottom: 0;
+    left: 18px;
+    width: 5px;
+    background: #dae6f6;
+  }
+}
+
+.bl_timeLine {
+  position: relative;
+
+  &_icon {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    background: $themeColor;
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px #dae6f6;
+    text-align: center;
+    left: 13px;
+    top: 10px;
+  }
+
+  &_body {
+    @include lastMB0();
+    position: relative;
+    left: 70px;
+    display: table;
+    width: calc(100% - 70px);
+    margin-bottom: 25px;
+    background: #f2f3f5;
+    padding: 30px;
+    @include MQ(md){
+      display: block;
+    }
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 15px;
+      right: 100%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0px 23px 17px 0;
+      border-color: transparent #f2f3f5 transparent transparent;
+    }
+
+    &_label{
+      display: table-cell;
+      vertical-align: top;
+      width: 165px;
+      padding-right: 25px;
+      @include MQ(md){
+        display: block;
+        width: 117px;
+        margin-bottom: autoSpace(30, false, $sp_fz, $sp_lh);;
+      }
+
+      .el_label{
+        width: 100%;
+      }
+    }
+
+    &_desc{
+      @include lastMB0();
+      display: table-cell;
+      vertical-align: top;
+
+      dt{
+        margin-bottom: autoSpace(15, true);
+        font-weight: $fw__bold;
+      }
+      dd{
+        margin-bottom: autoSpace(30, true);
+        @include MQ(md){
+          margin-bottom: autoSpace(40, true, $sp_fz, $sp_lh);
+        }
+
+        img{
+          width: 75px;
+          vertical-align: top;
+          margin-left: 15px;
+          @include MQ(md){
+            width: 50%;display: block;
+            margin-top: autoSpace(27, false, $sp_fz, $sp_lh);
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+/* Pile Block
+   ========================================================================== */
+.bl_pileUnit {
+  @include MQ(md){
+    display: block;
+  }
+
+  &__col2 {
+    .bl_pileBlock {
+      float: left;
+      width: 48.5%;
+      margin-right: percentToCont(30);
+      &:nth-of-type(2n){
+        margin-right: 0;
+      }
+      @include MQ(md){
+        width: 100%;
+        margin-right: 0;
+        float: none;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__vertBorder {
+    .bl_pileBlock,
+    .bl_pileBlock.bl_pileBlock__noBorder {
+      margin-right: 0;
+      border-right: 1px solid $borderColor;
+      &:last-child {
+        border-right: none;
+      }
+      @include MQ(md){
+        padding-bottom: 40px;
+        margin-bottom: autoSpace(40, false ,$sp_fz__xxxLarge, $sp_lh);
+        border-right: none;
+        border-bottom: 1px solid $borderColor;
+
+        &:last-child {
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
+
+.bl_pileBlock {
+  $that: #{&};
+  @include lastMB0();
+  padding: autoSpace(30, false, $fz__xxxLarge) $contSpace 25px;
+  border: 1px solid $borderColor;
+  text-align: center;
+
+  &#{$that}__noBorder {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+  }
+
+  &_ttl {
+    margin-bottom: autoSpace(20, false, $fz__xxxLarge);
+    padding: 0;
+    font-size: $fz__xxxLarge;
+    text-align: center;
+    @include MQ(md){
+      margin-bottom: autoSpace(24, false, $sp_fz__xxxLarge, $sp_lh);
+      font-size: $sp_fz__xxxLarge;
+    }
+
+    &__mbLarge {
+      margin-bottom: autoSpace(35, false, $fz__xxxLarge);
+      @include MQ(md){
+        margin-bottom: autoSpace(25, false, $sp_fz__xxxLarge, $sp_lh);
+      }
+    }
+  }
+
+  &_txt {
+    margin-bottom: autoSpace(20);
+    @include MQ(md){
+      margin-bottom: autoSpace(25, false, $sp_fz, $sp_lh);
+    }
+
+    .icon-tel{
+      position: relative;
+      top: .3rem;
+      font-size: 2.5rem;
+      @include MQ(md){
+        font-size: 6vw;
+      }
+    }
+  }
+}
+
+
+
+/* Map Image
+   ========================================================================== */
+.bl_mapImg {
+  width: 100%;
+  height: 440px;
+  margin-bottom: 60px;
+  @include MQ(md){
+    width: 100%;
+    height: (440 / 750) * 100 + vw;
+    margin-bottom: 40px;
+  }
+}

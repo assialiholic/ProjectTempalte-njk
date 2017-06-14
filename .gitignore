@@ -1,0 +1,9 @@
+Thumbs.db
+.DS_Store
+npm-debug.log
+node_modules
+build
+dest
+public_html
+backstop_data
+styleguide

@@ -1,0 +1,345 @@
+/* Title
+   ========================================================================== */
+.el_pageTtl {
+  $that: #{&};
+  margin-top: - halfLineHeight($fz__h1);
+  margin-bottom: autoSpace(60, false, $fz__h1);
+  font-family: $ff__serif;
+  font-size: $fz__h1;
+  font-weight: $fw__bold;
+  text-align: center;
+  @include MQ(md){
+    margin-bottom: autoSpace(40, true, $fz__h1, $sp_lh);
+    font-size: $sp_fz__h2;
+  }
+
+  &#{$that}__white{
+    color: #fff;
+  }
+}
+
+.el_sectTtl {
+  $that: #{&};
+  margin-top: - halfLineHeight($fz__h2);
+  margin-bottom: autoSpace(77, false, $fz__h2);
+  background-position: center 0;
+  background-repeat: no-repeat;
+  font-family: $ff__serif;
+  font-size: $fz__h2;
+  font-weight: $fw__bold;
+  text-align: center;
+  @include MQ(md){
+    margin-bottom: autoSpace(40, false, $sp_fz__h2, $sp_lh);
+    font-size: $sp_fz__h2;
+  }
+
+  &#{$that}__service{
+    background-image: url(#{$assetsRoot}/img/business/section-title-service.png);
+    padding-top: autoSpace(68, false, $fz__h2);
+  }
+
+  &#{$that}__solution{
+    background-image: url(#{$assetsRoot}/img/business/section-title-solution.png);
+    padding-top: autoSpace(75, false, $fz__h2);
+  }
+
+  &#{$that}__media{
+    background-image: url(#{$assetsRoot}/img/business/section-title-media.png);
+    padding-top: autoSpace(76, false, $fz__h2);
+  }
+
+  &#{$that}__investment{
+    background-image: url(#{$assetsRoot}/img/business/section-title-investment.png);
+    padding-top: autoSpace(76, false, $fz__h2);
+  }
+}
+
+.el_subTtl{
+  margin-bottom: autoSpace(20, true, $fz__h3, $lh);
+  font-size: $fz__h3;
+  text-align: center;
+}
+
+.el_numTtl{
+  display: inline-block;
+  margin-top: - halfLineHeight($fz__AZ);
+  font-family: $ff__serif;
+  font-size: $fz__AZ;
+  font-weight: $fw__bold;
+  vertical-align: sub;
+  @include MQ(md){
+    font-size: 8vw;
+  }
+}
+
+/* Text
+   ========================================================================== */
+.el_emphaTxt{
+  margin-bottom: autoSpace(30, false, $fz__xxxLarge);
+  font-size: $fz__xxxLarge;
+  font-weight: $fw__bold;
+  text-align: center;
+  @include MQ(md){
+    font-size: $sp_fz;
+  }
+}
+
+.el_note{
+  font-size: $fz__xxSmall;
+  @include MQ(md){
+    font-size: $sp_fz;
+  }
+}
+
+
+/* Button
+   ========================================================================== */
+.el_btn {
+  $that: #{&};
+  position: relative;
+  display: inline-block;
+  width: 271px;
+  padding: totalPadHeight(45, $fz__small) 40px totalPadHeight(48, $fz__small);
+  border: 1px solid $themeColor;
+  -webkit-border-radius: 60px;
+  -moz-border-radius: 60px;
+  -ms-border-radius: 60px;
+  -o-border-radius: 60px;
+  border-radius: 60px;
+  color: $themeColor;
+  font-size: $fz__small;
+  font-weight: $fw__bold;
+  text-align: center;
+  vertical-align: middle;
+  @include MQ(md){
+    max-width: 388px;
+    width: 95%;
+  }
+
+  &:after{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    content: "\e901";
+    font-weight: $fw;
+    font-family: 'icomoon';
+    font-size: 1.25rem;
+  }
+
+  @include FHA(){
+    text-decoration: none;
+    background-color: $themeColor;
+    color: #fff;
+  }
+
+  &#{$that}__white{
+    border-color: #fff;
+    color: #fff;
+
+    &:after{
+      color: #fff;
+    }
+    @include FHA(){
+      background-color: #fff;
+      color: $themeColor;
+      &:after{
+        color: $themeColor;
+      }
+    }
+  }
+
+  &#{$that}__large{
+    width: 340px;
+    padding: totalPadHeight(57, $fz__xLarge) 40px totalPadHeight(63, $fz__xLarge) 30px;
+    font-size: $fz__xLarge;
+    @include MQ(md){
+      max-width: 388px;
+      width: 95%;
+    }
+  }
+
+  &#{$that}__bgcTheme{
+    background-color: $themeColor;
+    border-color: $themeColor;
+    color: #fff;
+
+    &:after{
+      color: #fff;
+    }
+    @include FHA(){
+      background-color: #fff;
+      border-color: #fff;
+      color: $themeColor;
+      &:after{
+        color: $themeColor;
+      }
+    }
+  }
+
+  &#{$that}__noIcon{
+    &:after{
+      content: none;
+    }
+  }
+}
+
+
+/* Label
+   ========================================================================== */
+.el_label {
+  $this: #{&};
+  display: inline-block;
+  padding: 2px 7px;
+  background-color: $themeColor;
+  color: #fff;
+  font-size: $fz__small;
+  letter-spacing: normal;
+  text-align: center;
+  @include MQ(md){
+    font-size: $sp_fz__xxxSmall;
+  }
+
+  &#{$this}__accent {
+    background-color: $accentColor;
+  }
+  &#{$this}__large {
+    padding-top: totalPadHeight(40, $fz);
+    padding-bottom: totalPadHeight(40, $fz);
+    font-size: $fz;
+    font-weight: $fw__bold;
+    @include MQ(md){
+      font-size: $sp_fz;
+    }
+  }
+}
+
+
+
+
+/* Icon
+   ========================================================================== */
+.el_icon{
+  $that: #{&};
+  position: relative;
+  padding-left: 2rem;
+  &:before {
+    position: absolute;
+    top: -.2rem;
+    left: 0;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &#{$that}__doc {
+    &:before{
+      content: "\f016";
+      font-family: 'FontAwesome';
+    }
+  }
+}
+
+.el_icon02 {
+  $that: #{&};
+  position: relative;
+  padding-right: 20px;
+
+  &#{$that}__mapMarker {
+    &:after{
+      content: "\e904";
+      display: block;
+      width: 8px;
+      height: 20px;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      -webkit-transform: translate(0, -55%);
+      transform: translate(0, -55%);
+      font-family: 'icomoon';
+    }
+  }
+}
+
+
+/* Link
+   ========================================================================== */
+.el_pageTop{
+  display: block;
+  width: 40px;
+  height: 40px;
+  @include FHA{
+    text-decoration: none;
+  }
+}
+
+
+
+/* Form
+   ========================================================================== */
+.el_inputBlock {
+  $that: '.el_inputBlock';
+  position: relative;
+  display: block;
+
+  input {
+    width: 100%;
+    height: 40px;
+    padding-right: 10px;
+    padding-left: 10px;
+    display: inline-block;
+    background-color: $baseColor;
+    @include placeholder(){
+      color: $txtColor;
+      font-size: $fz__small;
+    }
+    @include MQ(md){
+      height: 53px;
+      background-color: #fff;
+      @include placeholder(){
+        font-size: $sp_fz;
+      }
+    }
+  }
+
+  &#{$that}__search{
+    button{
+      display: block;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      left: 10px;
+      top: 45%;
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+      font-family: 'icomoon';
+      font-size: 2rem;
+      @include MQ(md){
+        width: 50px;
+        height: 53px;
+        top: 0;
+        right: 0;
+        left: auto;
+        background-color: $themeColor;
+        background-size: 23px 23px;
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+        color: #fff;
+        line-height: 53px;
+        text-align: center;
+
+        i:before{
+          color: #fff;
+        }
+      }
+    }
+
+    input {
+      padding-left: 40px;
+      @include MQ(md){
+        padding-left: 10px;
+      }
+    }
+  }
+}

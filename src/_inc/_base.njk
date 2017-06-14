@@ -1,0 +1,35 @@
+{% set inc_path = './' %}
+{% import inc_path + "_vars.njk" as vars %}
+{% import inc_path + "_macros.njk" as macros %}
+
+{% block head %}
+  {% include inc_path + "_head.njk" %}
+{% endblock %}
+
+{% block header %}
+<body>
+  {% include inc_path + "_header.njk" %}
+{% endblock %}
+
+{% if page.title != 'トップ' %}
+<div class="bl_pageTtl">
+  <div class="ly_body">
+    <h1 class="el_pageTtl">{{ page.title }}</h1>
+  </div>
+  <!-- /.ly_body -->
+</div>
+<!-- /.bl_pageTtl -->
+
+<div class="ly_body">
+{% endif %}
+
+{% block body %}{% endblock %}
+
+{% if page.title != 'トップ' %}
+</div>
+<!-- /.ly_body -->
+{% endif %}
+
+{% block footer %}
+  {% include inc_path + "_footer.njk" %}
+{% endblock %}
