@@ -1,21 +1,18 @@
 /* Header
    ========================================================================== */
 .ly_header {
-  padding-top: 15px;
-
-
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 10000;
+  z-index: 10;
   background-color: #fff;
-
-  a:link{
-    color: $txtColor;
-  }
 
   &_inner{
     @include contentCentering();
+  }
+
+  a:link{
+    color: $txtColor;
   }
 }
 
@@ -24,31 +21,21 @@
 .ly_body{
   @include contentCentering();
   @include lastMB0();
-
-  > .bl_sect02:last-child{
-    border-bottom: none;
-  }
 }
 
 /* Footer
    ========================================================================== */
 
 .ly_footer {
-  padding-top: autoSpace(50, false, $fz__small);
-  padding-bottom: autoSpace(65, false, $fz__small);
-  font-size: $fz__small;
+  padding-top: $sectSpace;
+  padding-bottom: $sp_sectSpace;
   @include MQ(md){
-    padding-top: 0;
-    padding-bottom: autoSpace(95, false, $sp_fz__xxxLarge, $sp_lh);
-    font-size: $sp_fz__xxxLarge;
+    padding-top: $sp_sectSpace;
+    padding-bottom: $sp_sectSpace;
   }
 
   &_inner{
     @include contentCentering();
-    @include MQ(md){
-      padding-right: 0;
-      padding-left: 0;
-    }
   }
 
   a:link{
@@ -59,7 +46,6 @@
 /* Others
    ========================================================================== */
 .ly_pageTop{
-  $this: #{&};
   position: fixed;
   z-index: 9999;
   bottom: 15px;
@@ -67,7 +53,6 @@
   width: 60px;
   height: 60px;
   @include FHA{
-    opacity: 1;
     opacity: $hoverOpacity;
   }
   &.is_end{

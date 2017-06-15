@@ -13,21 +13,55 @@
   @return ($pd - $lh) / 2 + px;
 }
 
-@function autoSpace($num:0, $continueText:false, $fz:$fz, $lh:$lh){
-  @if not ($num == 0 and $fz == $fz and $lh == $lh){
-    //px変換し、単位を除く値のみを取得
-    $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-    @if ($continueText){
-      @return $num - ($lh * $fz - $fz) + px;
-    } @else {
-      @return $num - (($lh * $fz - $fz)/2) + px;
-    }
-  } @else {
-    @return $num + px;
-  }
+/**
+ * half-leadingを考慮し、見た目上で空いて欲しい余白になるよう値を自動算出します
+ * @num {number} 最終的に空いて欲しい値
+ * @fz {string} その要素のfont-size（デフォルト値:$fz）
+ * @lh {number} その要素のline-height（デフォルト値:$fz）
+ */
+@function autoSpace($num:0, $fz:$fz, $lh:$lh){
+  //px変換し、単位を除く値のみを取得
+  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+  @return $num - (($lh * $fzValue - $fzValue)/2) + px;
 }
 
-//line-heightの半分をネガティブマージンで打ち消す想定
+@function sp_autoSpace($num:0, $fz:$sp_fz, $lh:$sp_lh){
+  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+  @return $num - (($lh * $fzValue - $fzValue)/2) + px;
+}
+
+
+
+/**
+ * 後続要素がテキストの場合、autoSpaceの代わりにこちらを使用します。
+ * @num {number} autoSpaceと同様
+ * @fz {string} autoSpaceと同様
+ * @fz2 {string} 後続要素のfont-size
+ * @lh {number} autoSpaceと同様
+ * @lh2 {number} 後続要素のline-height
+ */
+@function autoSpace2($num:0, $fz:$fz, $fz2:$fz, $lh:$lh, $lh2:$lh){
+  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+  $autoSpaceValue: $num - (($lh * $fzValue - $fzValue)/2);
+
+  $fz2Value: ($fz2 / ((floor($fz2) * 2) % 2 + 1)) * 10;
+  $nextHalfLineHeight: (($fz2Value * $lh2) - $fz2Value) / 2;
+
+  @return $autoSpaceValue - $nextHalfLineHeight + px;
+}
+
+@function sp_autoSpace2($num:0, $fz:$sp_fz, $fz2:$sp_fz, $lh:$sp_lh, $lh2:$sp_lh){
+  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+  $autoSpaceValue: $num - (($lh * $fzValue - $fzValue)/2);
+
+  $fz2Value: ($fz2 / ((floor($fz2) * 2) % 2 + 1)) * 10;
+  $nextHalfLineHeight: (($fz2Value * $lh2) - $fz2Value) / 2;
+
+  @return $autoSpaceValue - $nextHalfLineHeight + px;
+}
+
+
+//ネガティブマージンで打ち消す想定でline-heightの半分を取得
 @function halfLineHeight($fz:$fz, $lh:$lh){
   $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
   @return (($fz * $lh) - $fz) / 2 + px;

@@ -166,8 +166,3 @@ margin-right
     display: block !important;
   }
 }
-.sp_mb40{
-  @include MQ(md){
-    margin-bottom: 40px !important;
-  }
-}

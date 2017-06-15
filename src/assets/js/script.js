@@ -278,26 +278,12 @@ function execmatchHeight(){
 }
 
 
-// Hiraku.js
-// -------------------------------------------------------------------
-
-function execHiraku(){
-  $(".js_offcanvas").hiraku({
-    btn: ".js_offcanvas_btn",
-    direction: "right",
-    breakpoint: spWidth
-  });
-}
-
-
-
 
 // -------------------------------------------------------------------
 // window event
 // -------------------------------------------------------------------
 $(function(){
   execmatchHeight();
-  execHiraku();
   dropDownMenu();
   smoothScroll();
 });

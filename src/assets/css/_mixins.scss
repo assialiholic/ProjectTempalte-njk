@@ -77,7 +77,7 @@
   }
 }
 
-@mixin placeholder {
+@mixin placeholder() {
     &:placeholder-shown {
         @content;
     }
@@ -96,7 +96,6 @@
         @content;
     }
 }
-
 
 @mixin addRightChevron($which:after, $position:30){
   display: block;

@@ -1,10 +1,11 @@
 {% set inc_path = './_inc/' %}
 {% set page = {
-  title: '採用情報'
+  title: 'サブページのタイトル'
 } %}
 
 {% extends inc_path + "_base.njk" %}
 
+{#{%- set unique_head = '' %}#}
 {% block head %}
   {{ super() }}
 {% endblock %}
@@ -14,32 +15,11 @@
 {% endblock %}
 
 {% block body %}
-  <div class="bl_sect">
-    <figure class="bl_heloImg"><img src="{{ vars.assets_root }}/img/recruit/recruit-MV.jpg" alt="Change Factsinto Value 「事実」を「価値」に変えていく"></figure>
-    <div class="bl_sect03">
-      <h2 class="el_pageTtl">ネットPRのパイオニア</h2>
-      <p>ニューズツーユーグループはこれまで、ネットPRのパイオニアとして、<br>
-        2001年に国内最大級の企業ニュースリリース専門ポータルサイト「News2u.net」を立ち上げなど企業のニュースリリースの情報流通のいわば旗艦となり、<br>
-        これまでに国内1500社以上に導入実績とそれに伴うWebソリューションを提供してきました。</p>
-
-      <p>そのサービスの根底にあるのは「Fairness & Reliability」という精神。<br>
-        グローバル化の進展する中で、企業の情報発信の在り方、Webやネットを使ったサービスの構築や創出を公平な考え、信頼を重んじ事業を行っております。<br>
-        ネットPRのオンリーワン企業を目指して、広い視野とイノベーションを実現する信念を持ち、チャレンジする仲間を募集しています。</p>
-    </div>
-    <!-- /.bl_sect02 -->
-
-    <div class="bl_lightGrayBlock">
-      <p class="el_emphaTxt">
-        採用のご応募をお考えの方は、<br>
-        下記のお問い合わせフォームよりご連絡ください。
-      </p>
-      <p class="hp_tac"><a href="https://www.news2u.co.jp/inquiries" target="_blank" class="el_btn">お問い合わせフォームへ</a></p>
-    </div>
-    <!-- /.bl_lightGrayBlock -->
-  </div>
-  <!-- /.bl_sect -->
+  {{ super() }}
+  content here
 {% endblock %}
 
+{#{%- set unique_footer = '' %}#}
 {% block footer %}
   {{ super() }}
 {% endblock %}

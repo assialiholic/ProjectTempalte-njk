@@ -1,11 +1,2 @@
-{% macro searchForm(data) %}
-<form method="get" id="search" action="https://www.news2u.co.jp/mt/mt-search.cgi">
-  <span class="el_inputBlock el_inputBlock__search">
-    <button type="submit" name="button"><i class="icon-search"></i></button>
-    <input type="text" name="search" value="" placeholder="検索するキーワードを入力">
-  </span>
-    <input type="hidden" name="IncludeBlogs" value="<$mt:SearchIncludeBlogs$>">
-    <input type="hidden" name="IncludeBlogs" value="<$mt:BlogID$>">
-    <input type="hidden" name="limit" value="<$mt:SearchMaxResults$>">
-</form>
+{% macro macro_name_here(data) %}
 {% endmacro %}
