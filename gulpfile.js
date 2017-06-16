@@ -1,10 +1,9 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     runSequence = require('run-sequence'),
     browserSync = require('browser-sync'),
-    stylish = require('jshint-stylish'),
     p = require('gulp-load-plugins')();
 
-var SRC = 'src',
+const SRC = 'src',
     DEST = 'public_html',
     GUIDE = 'style_guide';
 
@@ -22,7 +21,7 @@ gulp.task('njk', function(){
     SRC + '/**/*.njk',
     '!src/_inc/*.njk'
   ])
-  // .pipe(p.cached())
+  .pipe(p.cached())
   .pipe(p.using())
   .pipe(plumberNotify())
   .pipe(p.nunjucksRender({path:SRC +'/'}))
@@ -81,13 +80,12 @@ gulp.task('sass', function () {
   ],{
     base: SRC
   })
-  // .pipe(p.cached())
   .pipe(p.using())
   .pipe(plumberNotify())
   .pipe(p.sourcemaps.init())
   .pipe(p.sass({outputStyle: 'expanded'}).on('error', p.sass.logError))
   .pipe(p.autoprefixer({
-    browsers: ['last 2 versions', 'ie 9-11', 'iOS >= 8', 'Android >= 4.4'],
+    browsers: ['last 2 versions', 'ie 10-11', 'iOS >= 8', 'Android >= 4.4'],
     cascade: false
   }))
   .pipe(p.sourcemaps.write('../' + DEST))
@@ -95,70 +93,36 @@ gulp.task('sass', function () {
 });
 
 
-//Autoprefixer
-gulp.task('prefix', ['sass'], function () {
-  return gulp.src([
-    DEST + '/**/*.css'
-  ],{
-    base: SRC
-  })
-  // .pipe(p.cached())
-  .pipe(p.using())
-  .pipe(plumberNotify())
-  .pipe(p.autoprefixer())
-  .pipe(gulp.dest(DEST))
-});
-
-
-//CSSファイルを整形
-gulp.task('css', function(){
-  return gulp.src([
-    'public_html/**/*.css',
-    '!public_html/**/jquery.*.css',
-  ],{
-    base: DEST
-  })
-  .pipe(p.using())
-  // .pipe(p.pleeease({
-  //   autoprefixer: {browsers: ['last 2 versions', 'ie 9-11', 'iOS >= 8']},
-  //   filters: false,
-  //   rem: false,
-  //   pseudoElements: true,
-  //   opacity: false,
-  //   import: false,
-  //   minifier: false,
-  //   mqpacker: true,
-  //   sourcemaps: false
-  // }))
-  .pipe(p.autoprefixer({
-    browsers: ['last 2 versions', 'ie 9-11', 'iOS >= 8', 'Android >= 4.4'],
-    cascade: false
-  }))
-  // .pipe(p.csscomb())
-  .pipe(gulp.dest(DEST));
-});
-
 
 // -------------------------------------------------------------------
 // JS
 // -------------------------------------------------------------------
 //JSチェック
-gulp.task('jshint', function(){
+gulp.task('eslint', function(){
   return gulp.src([
     SRC + '/**/*.js',
     '!src/**/jquery.*.js',
     '!src/**/*.min.js'
   ])
-// .pipe(p.cached())
+  .pipe(p.cached())
   .pipe(p.using())
   .pipe(plumberNotify())
-  // .pipe(p.jshint({
-  // //   "strict": true,
-  //   "sub": true
-  // }))
-  // .pipe(p.jshint.reporter(stylish))
-  // .pipe(p.jshint.reporter('fail'))
+  .pipe(p.plumber({
+      errorHandler: p.notify.onError('Error: <%= error.message %>')
+  }))
+  .pipe(p.eslint({useEslintrc: true}))
+  .pipe(p.eslint.format())
+  .pipe(p.eslint.failAfterError())
   .pipe(gulp.dest(DEST));
+});
+
+
+
+
+//clean
+const rimraf = require('rimraf');
+gulp.task('clean', function (cb) {
+  rimraf(DEST, cb);
 });
 
 
@@ -191,16 +155,27 @@ gulp.task('server', function(){
 
 //watch
 gulp.task('watch', ['server'], function(){
-  gulp.watch([SRC + '/**/*.html', SRC + '/**/*.css', SRC + '/**/*.json'], ['copy', browserSync.reload]);
-  gulp.watch([SRC + '/**/images/*', SRC + '/**/img/*'], ['copy', browserSync.reload]);
-  gulp.watch([SRC + '/**/*.css'], ['copy', browserSync.reload]);
+  gulp.watch([
+    SRC + '/**/*',
+    '!src/**/*.scss',
+    '!src/**/*.njk',
+    '!src/_inc'
+  ], ['copy', browserSync.reload]);
   gulp.watch([SRC + '/**/*.scss'], ['sass', browserSync.reload]);
-  gulp.watch([SRC + '/**/*.js'], ['jshint', browserSync.reload]);
+  gulp.watch([SRC + '/**/*.js'], ['eslint', browserSync.reload]);
   gulp.watch([SRC + '/**/*.njk'], ['njk', browserSync.reload]);
 });
 
 
-gulp.task('default', ['copy', 'sass', 'njk', 'watch']);
+gulp.task('default', function (cb) {
+  runSequence(
+    'clean',
+    'copy',
+    ['sass', 'njk'],
+    'watch',
+    cb
+  );
+});
 
 
 

@@ -1,3 +1,5 @@
+'use strict';
+
 jQuery(function($){
 // -------------------------------------------------------------------
 // global Variable Setting
@@ -37,10 +39,10 @@ function smoothScroll(){
     $('a[href^=#]').not('.js_noScroll').each(function () {
       $(this).on('click', function (event) {
         var $this = $(this);
-        var href = $this.attr("href");
+        var href = $this.attr('href');
         if ($this.parents('.js_pageTop')) {
           destination = $('body');
-        } else if (href != "#" || href !== "") {
+        } else if (href !== '#' || href !== '') {
           //hrefが#で終わるもの以外を対象にする
           destination = $(href);
         }
@@ -57,9 +59,9 @@ function smoothScroll(){
   var position = target.offset().top;
   var diffPosition  = position - headerHeight; // ヘッダーが固定なのでヘッダー分差し引く
 
-  $("html, body").animate({
+  $('html, body').animate({
     scrollTop: diffPosition
-  }, 550, "swing");
+  }, 550, 'swing');
   return target;
 }
 
@@ -74,17 +76,18 @@ function smoothScrollOnLoad(){
 
   // スクロールすべきDOMが存在しない場合は発火しない
   var targetOffset = $(hash).offset();
-  if(targetOffset != null) {
-    var position = $(hash).offset().top;
+  if(targetOffset !== null) {
+    var position = $(hash).offset().top,
+        diffPosition;
     if(viewportChecker()){
-      var diffPosition = position - headerHeight - 10;//良い感じに調整
+      diffPosition = position - headerHeight - 10;//良い感じに調整
     } else {
-      var diffPosition = position - headerHeight - 50;
+      diffPosition = position - headerHeight - 50;
     }
 
-    $("html, body").animate({
+    $('html, body').animate({
       scrollTop: diffPosition
-    }, 550, "swing");
+    }, 550, 'swing');
   }
 }
 
