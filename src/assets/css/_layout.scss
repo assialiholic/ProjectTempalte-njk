@@ -2,23 +2,23 @@
    ========================================================================== */
 .ly_header {
   position: fixed;
+  z-index: 10;
   top: 0;
   width: 100%;
-  z-index: 10;
   background-color: #fff;
 
-  &_inner{
+  &_inner {
     @include contentCentering();
   }
 
-  a:link{
+  a:link {
     color: $txtColor;
   }
 }
 
 /* Body
    ========================================================================== */
-.ly_body{
+.ly_body {
   @include contentCentering();
   @include lastMB0();
 }
@@ -29,35 +29,38 @@
 .ly_footer {
   padding-top: $sectSpace;
   padding-bottom: $sp_sectSpace;
-  @include MQ(md){
+
+  @include MQ(md) {
     padding-top: $sp_sectSpace;
     padding-bottom: $sp_sectSpace;
   }
 
-  &_inner{
+  &_inner {
     @include contentCentering();
   }
 
-  a:link{
+  a:link {
     color: $txtColor;
   }
 }
 
 /* Others
    ========================================================================== */
-.ly_pageTop{
+.ly_pageTop {
   position: fixed;
   z-index: 9999;
-  bottom: 15px;
   right: 15px;
+  bottom: 15px;
   width: 60px;
   height: 60px;
-  @include FHA{
+
+  @include FHA {
     opacity: $hoverOpacity;
   }
-  &.is_end{
+  &.is_end {
     opacity: 1;
-    @include FHA{
+
+    @include FHA {
       opacity: $hoverOpacity;
     }
   }

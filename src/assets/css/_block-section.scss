@@ -1,8 +1,9 @@
-.bl_sect{
-  @include lastMB0();
+.bl_sect {
   padding-top: $sectSpace;
   padding-bottom: $sectSpace;
-  @include MQ(md){
+
+  @include lastMB0();
+  @include MQ(md) {
     padding-top: $sp_sectSpace;
     padding-bottom: $sp_sectSpace;
   }

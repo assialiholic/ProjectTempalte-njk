@@ -1,37 +1,41 @@
 //@import '//fonts.googleapis.com/css?family=';
 @font-face {
   font-family: 'Noto Sans Japanese';
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
+
   src: local('NotoSansCJKjp-Regular'),
-       local('NotoSansJP-Regular.otf'),
-       url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Regular.woff2) format('woff2'),
-       url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Regular.woff) format('woff'),
-       url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Regular.otf) format('opentype');
- }
+  local('NotoSansJP-Regular.otf'),
+  url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Regular.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Regular.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Regular.otf) format('opentype');
+}
 
 @font-face {
   font-family: 'Noto Sans Japanese';
-  font-style: normal;
   font-weight: 500;
+  font-style: normal;
+
   src: local('NotoSansCJKjp-Medium'),
-       url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.woff2) format('woff2'),
-       url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.woff) format('woff'),
-       url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.otf) format('opentype');
- }
+  url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.woff2) format('woff2'),
+  url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.woff) format('woff'),
+  url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Medium.otf) format('opentype');
+}
 
 @font-face {
   font-family: 'Noto Serif Japanese';
-  font-style: normal;
   font-weight: 400;
+  font-style: normal;
+
   src: local('NotoSerifCJKjp-Regular'),
-       url(#{$assetsRoot}/fonts/NotoSerifCJKjp-Regular.otf) format('opentype');
+  url(#{$assetsRoot}/fonts/NotoSerifCJKjp-Regular.otf) format('opentype');
 }
 
- @font-face {
+@font-face {
   font-family: 'Noto Serif Japanese';
-  font-style: normal;
   font-weight: 500;
+  font-style: normal;
+
   src: local('NotoSerifCJKjp-Medium'),
-       url(#{$assetsRoot}/fonts/NotoSerifCJKjp-Medium.otf) format('opentype');
+  url(#{$assetsRoot}/fonts/NotoSerifCJKjp-Medium.otf) format('opentype');
 }

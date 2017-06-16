@@ -2,12 +2,14 @@
    ========================================================================== */
 .el_pageTtl {
   $wrp: '.el_pageTtl';
+
   margin-top: - halfLineHeight($fz__h1);
   //margin-bottom: autoSpace(0, $fz__h1);
   font-size: $fz__h1;
   font-weight: $fw__bold;
   text-align: center;
-  @include MQ(md){
+
+  @include MQ(md) {
     //margin-bottom: sp_autoSpace(0, $sp_fz__h1);
     font-size: $sp_fz__h1;
   }
@@ -15,18 +17,20 @@
 
 .el_sectTtl {
   $wrp: '.el_sectTtl';
+
   margin-top: - halfLineHeight($fz__h2);
   //margin-bottom: autoSpace(0, $fz__h2);
   font-size: $fz__h2;
   font-weight: $fw__bold;
   text-align: center;
-  @include MQ(md){
+
+  @include MQ(md) {
     //margin-bottom: sp_autoSpace(0, $sp_fz__h2);
     font-size: $sp_fz__h2;
   }
 }
 
-.el_subTtl{
+.el_subTtl {
   //margin-bottom: autoSpace(0, $fz__h3);
   font-size: $fz__h3;
   text-align: center;
@@ -35,19 +39,21 @@
 
 /* Text
    ========================================================================== */
-.el_emphaTxt{
+.el_emphaTxt {
   //margin-bottom: autoSpace(0, $fz__ll);
   font-size: $fz__ll;
   font-weight: $fw__bold;
   text-align: center;
-  @include MQ(md){
+
+  @include MQ(md) {
     font-size: $sp_fz;
   }
 }
 
-.el_note{
+.el_note {
   font-size: $fz__ss;
-  @include MQ(md){
+
+  @include MQ(md) {
     font-size: $sp_fz;
   }
 }
@@ -57,6 +63,7 @@
    ========================================================================== */
 .el_btn {
   $wrp: '.el_btn';
+
   position: relative;
   display: inline-block;
   width: 271px;
@@ -68,30 +75,26 @@
   font-size: $fz;
   text-align: center;
   vertical-align: middle;
-  @include MQ(md){
+
+  @include MQ(md) {
     width: 95%;
     //margin-bottom: sp_autoSpace(0);
   }
-
-  &:after{
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
-    content: "\f054";
-    font-family: 'FontAwesome';
-    font-size: 1.25em;
-  }
-
-  @include FHA(){
-    text-decoration: none;
+  @include FHA() {
     background-color: $themeColor;
     color: #fff;
+    text-decoration: none;
   }
 
-  &#{$wrp}__modyfierHere{
-
+  &:after {
+    content: '\f054';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    font-family: 'FontAwesome';
+    font-size: 1.25em;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
   }
 }
 
@@ -100,6 +103,7 @@
    ========================================================================== */
 .el_label {
   $wrp: '.el_label';
+
   display: inline-block;
   padding: 2px 7px;
   background-color: $themeColor;
@@ -107,12 +111,9 @@
   font-size: $fz__s;
   letter-spacing: normal;
   text-align: center;
-  @include MQ(md){
+
+  @include MQ(md) {
     font-size: $sp_fz__ss;
-  }
-
-  &#{$wrp}__modyfierHere{
-
   }
 }
 
@@ -121,8 +122,9 @@
 
 /* Icon
    ========================================================================== */
-.el_icon{
+.el_icon {
   $wrp: '.el_icon';
+
   position: relative;
   padding-left: 1.3em;
   &:before {
@@ -134,8 +136,8 @@
   }
 
   &#{$wrp}__pdf {
-    &:before{
-      content: "\f1c1";
+    &:before {
+      content: '\f1c1';
       font-family: 'FontAwesome';
     }
   }
@@ -143,9 +145,10 @@
 
 .el_icon02 {
   $wrp: '.el_icon02';
+
   position: relative;
   padding-right: 1.6em;
-  &:after{
+  &:after {
     position: absolute;
     right: 0;
     bottom: -.2em;
@@ -154,8 +157,8 @@
   }
 
   &#{$wrp}__blank {
-    &:after{
-      content: "\f2d2";
+    &:after {
+      content: '\f2d2';
       font-family: 'FontAwesome';
     }
   }
@@ -164,11 +167,12 @@
 
 /* Link
    ========================================================================== */
-.el_pageTop{
+.el_pageTop {
   display: block;
   width: 40px;
   height: 40px;
-  @include FHA{
+
+  @include FHA {
     text-decoration: none;
   }
 }
@@ -177,4 +181,3 @@
 
 /* Form
    ========================================================================== */
-

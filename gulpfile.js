@@ -58,12 +58,14 @@ gulp.task('add', ['check'], function(){
 gulp.task('comb', function () {
   return gulp.src([
     SRC + '/**/*.scss',
+    '!src/**/_vars.scss',
+    '!src/**/_functions.scss',
+    '!src/**/_mixins.scss',
     '!src/**/_base.scss',
     '!src/**/_helper.scss'
   ],{
     base: SRC
   })
-  // .pipe(p.cached())
   .pipe(p.using())
   .pipe(plumberNotify())
   .pipe(p.csscomb())
@@ -82,7 +84,6 @@ gulp.task('sass', function () {
   // .pipe(p.cached())
   .pipe(p.using())
   .pipe(plumberNotify())
-  .pipe(p.csscomb())
   .pipe(p.sourcemaps.init())
   .pipe(p.sass({outputStyle: 'expanded'}).on('error', p.sass.logError))
   .pipe(p.autoprefixer({
