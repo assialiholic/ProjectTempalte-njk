@@ -1,6 +1,8 @@
 const gulp = require('gulp'),
     runSequence = require('run-sequence'),
     browserSync = require('browser-sync'),
+    through2 = require('through2'),
+    rimraf = require('rimraf'),
     p = require('gulp-load-plugins')();
 
 const SRC = 'src',
@@ -30,23 +32,19 @@ gulp.task('njk', function(){
 
 
 //ソースの品質チェック
-gulp.task('check', ['njk'], function(){
+gulp.task('check', ['njk', 'comb'], function(){
   return gulp.src([
     DEST + '/**/*.html'
   ])
-    .pipe(p.cached('checking'))
     .pipe(p.using())
     .pipe(plumberNotify())
     .pipe(p.w3cjs())
-    .pipe(p.w3cjs.reporter())
-});
-
-//ソースの品質チェック後、git add
-gulp.task('add', ['check'], function(){
-  return gulp.src([
-    SRC + '/**/*'
-  ])
-    .pipe(p.git.add());
+    .pipe(through2.obj(function(file, enc, cb){
+        cb(null, file);
+        if (!file.w3cjs.success){
+          file.pipe(p.notify('HTML validation error(s) found'));
+        }
+    }))
 });
 
 
@@ -107,9 +105,6 @@ gulp.task('eslint', function(){
   .pipe(p.cached())
   .pipe(p.using())
   .pipe(plumberNotify())
-  .pipe(p.plumber({
-      errorHandler: p.notify.onError('Error: <%= error.message %>')
-  }))
   .pipe(p.eslint({useEslintrc: true}))
   .pipe(p.eslint.format())
   .pipe(p.eslint.failAfterError())
@@ -117,10 +112,7 @@ gulp.task('eslint', function(){
 });
 
 
-
-
 //clean
-const rimraf = require('rimraf');
 gulp.task('clean', function (cb) {
   rimraf(DEST, cb);
 });
