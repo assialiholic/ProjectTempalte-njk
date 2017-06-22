@@ -65,3 +65,112 @@
     }
   }
 }
+
+
+
+.gr_wrapper {  
+  $wrp: '.gr_wrapper';
+  $gutter: 40;
+
+  margin-top: - percentToCont($gutter);
+
+  .gr_col{
+    float: left;
+    margin-right: percentToCont($gutter);
+    margin-top: percentToCont($gutter);
+  }
+  
+  &#{$wrp}__col2{
+    .gr_col{
+      @include childCol(2, $gutter);
+    }
+  }
+
+  &#{$wrp}__col3{
+    .gr_col{
+      @include childCol(3, $gutter);
+    }
+  }
+
+  &#{$wrp}__col4{
+    .gr_col{
+      @include childCol(4, $gutter);
+    }
+  }
+
+  &#{$wrp}__col5{
+    .gr_col{
+      @include childCol(5, $gutter);
+    }
+  }
+
+  &#{$wrp}__col6{
+    .gr_col{
+      @include childCol(6, $gutter);
+    }
+  }
+
+  &#{$wrp}__col7{
+    .gr_col{
+      @include childCol(7, $gutter);
+    }
+  }
+
+  &#{$wrp}__col8{
+    .gr_col{
+      @include childCol(8, $gutter);
+    }
+  }
+
+  &#{$wrp}__col9{
+    .gr_col{
+      @include childCol(9, $gutter);
+    }
+  }
+
+  &#{$wrp}__col10{
+    .gr_col{
+      @include childCol(10, $gutter);
+    }
+  }
+
+  &#{$wrp}__col11{
+    .gr_col{
+      @include childCol(11, $gutter);
+    }
+  }
+
+  &#{$wrp}__col12{
+    .gr_col{
+      @include childCol(12, $gutter);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

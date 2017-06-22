@@ -11,7 +11,8 @@ $assetsRoot: $fileRoot + '/assets';
 $breakpoint: 750;
 $contSpaceValue: 15;
 $contSpace: $contSpaceValue + px;
-$contWidthValue: 1080 + $contSpaceValue * 2;
+$innerContWidthValue: 1080;
+$contWidthValue: $innerContWidthValue + $contSpaceValue * 2;
 $contWidth: $contWidthValue + px;
 
 //

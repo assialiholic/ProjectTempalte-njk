@@ -77,3 +77,14 @@
   }
 }
 
+
+
+
+@mixin childCol($col:0, $gutter:0){
+  $width: (100/$col);
+  $gutterPercent: percentToCont($gutter);
+  width: round-decimal(($width - ($gutterPercent * ($col - 1) / $col)), 3);
+  &:nth-of-type(#{$col}n){
+    margin-right: 0;
+  }
+}
