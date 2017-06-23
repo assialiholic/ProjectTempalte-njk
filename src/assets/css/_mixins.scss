@@ -78,13 +78,52 @@
 }
 
 
-
-
-@mixin childCol($col:0, $gutter:0){
+@mixin childCol($col:0, $gutter:0, $mq:true){
   $width: (100/$col);
   $gutterPercent: percentToCont($gutter);
   width: round-decimal(($width - ($gutterPercent * ($col - 1) / $col)), 3);
   &:nth-of-type(#{$col}n){
     margin-right: 0;
+  }
+
+  @if $mq{
+    @include MQ(md){
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+}
+
+
+@mixin chilidCol__inline($display, $clearFloat:false){
+  letter-spacing: -.28em;
+  text-align: left;
+
+  .gr_col{
+    @if $clearFloat{
+      float: none;
+    }
+    display: $display;
+    letter-spacing: normal;
+    vertical-align: top;
+  }
+}
+
+@mixin chilidCol__float(){
+  .gr_col{
+    *zoom: 1;
+
+    &::before,
+    &::after {
+      content: ' ';
+      display: table;
+    }
+    &::after {
+      clear: both;
+    }
+
+    .gr_col{
+      float: left;
+    }
   }
 }

@@ -66,83 +66,79 @@
   }
 }
 
+a {
+  display: block;
+  background-color: #ddd!important;
+  p {
+    margin-bottom: 0;
+  }
+}
 
 
-.gr_wrapper {  
+.gr_wrapper {
   $wrp: '.gr_wrapper';
   $gutter: 40;
+  $columnNum: 12;
+  $layoutStyle: flex; //inline-table or inline-table or float or flex
 
   margin-top: - percentToCont($gutter);
 
-  .gr_col{
-    float: left;
-    margin-right: percentToCont($gutter);
-    margin-top: percentToCont($gutter);
-  }
-  
-  &#{$wrp}__col2{
-    .gr_col{
-      @include childCol(2, $gutter);
+  @if $layoutStyle != 'flex'{
+    @if $layoutStyle == 'float' {
+      @include chilidCol__float();
+    } @else if $layoutStyle == 'inline-table'{
+      @include chilidCol__inline(inline-table);
+    } @else if $layoutStyle == 'inline-block'{
+      @include chilidCol__inline(inline-block);
     }
-  }
 
-  &#{$wrp}__col3{
-    .gr_col{
-      @include childCol(3, $gutter);
+    &#{$wrp}__inlineTable{
+      @include chilidCol__inline(inline-table, true);
     }
-  }
 
-  &#{$wrp}__col4{
-    .gr_col{
-      @include childCol(4, $gutter);
+    &#{$wrp}__inlineBlock{
+      @include chilidCol__inline(inline-block, true);
     }
-  }
 
-  &#{$wrp}__col5{
-    .gr_col{
-      @include childCol(5, $gutter);
+    &#{$wrp}__float{
+      @include chilidCol__float();
     }
-  }
 
-  &#{$wrp}__col6{
     .gr_col{
-      @include childCol(6, $gutter);
+      margin-right: percentToCont($gutter);
+      margin-top: percentToCont($gutter);
     }
-  }
 
-  &#{$wrp}__col7{
-    .gr_col{
-      @include childCol(7, $gutter);
+    @for $i from 2 through $columnNum{
+      &#{$wrp}__col#{$i}{
+        .gr_col{
+          @include childCol($i, $gutter);
+        }
+
+        @for $j from 2 through $columnNum{
+          &#{$wrp}__col#{$i}#{$wrp}__spCol#{$j}{
+            @include MQ(md){
+              .gr_col{
+                @include childCol($j, $gutter, false);
+                margin-right: percentToCont($gutter);
+              }
+            }
+          }
+        }
+      }
     }
-  }
+  } @else {
+    display: flex;
+    flex-flow: row wrap; //nowrap
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: stretch;
 
-  &#{$wrp}__col8{
     .gr_col{
-      @include childCol(8, $gutter);
-    }
-  }
-
-  &#{$wrp}__col9{
-    .gr_col{
-      @include childCol(9, $gutter);
-    }
-  }
-
-  &#{$wrp}__col10{
-    .gr_col{
-      @include childCol(10, $gutter);
-    }
-  }
-
-  &#{$wrp}__col11{
-    .gr_col{
-      @include childCol(11, $gutter);
-    }
-  }
-
-  &#{$wrp}__col12{
-    .gr_col{
-      @include childCol(12, $gutter);
+      width: 100px;
+      margin-right: 20px;
+      margin-top: 20px;
+      flex: 1 1 150px;
     }
   }
 }
@@ -152,12 +148,20 @@
 
 
 
+.flex {
+  $wrp: '.flex';
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  justify-content: center;
 
+  &#{$wrp}__modyfierHere{}
 
-
-
-
-
+  &-child{
+    width: 1200px;
+    margin: 10px;
+  }
+}
 
 
 
