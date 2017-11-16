@@ -1,18 +1,3 @@
-
-@function removeUnit($value){
-  @if(type_of($value) == 'string'){
-    //@return #{$value} - unit($value);
-    //@return abs($value);
-    $fuga: 10px;
-    $hoge: $value / $value;
-    @return type_of($hoge);
-  } @else {
-    $rawValue: (floor($value) * 2) % 2 + 1;
-    @return ($value / $rawValue);
-  }
-}
-
-
 @function addPxUnit($value){
   @if(unit($value) == '%'){
     @return $value;
@@ -22,14 +7,6 @@
 }
 
 
-
-
-
-
-
-
-// Width/Height
-// -------------------------------------------------------------------
 @function to-fixed ($number, $digits: 0, $round: 'round') {
     $n: 1;
     // $number must be a number
@@ -65,17 +42,6 @@
     @return to-fixed($number, $digits, 'round');
 }
 
-// Ceil (切り上げ)
-@function ceil-decimal ($number, $digits: 0) {
-    @return to-fixed($number, $digits, 'ceil');
-}
-
-// Floor (切り捨て)
-@function floor-decimal ($number, $digits: 0) {
-    @return to-fixed($number, $digits, 'floor');
-}
-
-
 /**
  * 親要素に対するパーセンテージを算出します。第二引数は省略すると、サイトのコンテンツ幅を参照します。
  * @num {number} その要素の横幅
@@ -83,79 +49,4 @@
  */
 @function percentToCont($num, $contWidthValue:$contWidthValue) {
   @return ($num/$contWidthValue) * 100%;
-}
-
-// Padding/Margin
-// -------------------------------------------------------------------
-
-/**
- * 主にpadding-top・padding-bottomに使用します。
- * 第一引数に要素が最終的に取って欲しい高さを入れると、自動的にその高さになるようpadding値を算出します。
- * @num {number} 最終的に取って欲しい高さ
- * @fz {string} その要素のfont-size（デフォルト値:$fz）
- * @lh {number} その要素のline-height（デフォルト値:$lh）
- */
-@function totalPadHeight($num, $fz:$fz, $lh:$lh){
-  //px変換し、単位を除く値のみを取得
-  $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  $lh: $fz * $lh;
-  @return ($num - $lh) / 2 + px;
-}
-
-
-/**
- * half-leadingを考慮し、見た目上で空いて欲しい余白になるよう値を自動算出します
- * @num {number} 最終的に空いて欲しい値
- * @fz {string} その要素のfont-size（デフォルト値:$fz）
- * @lh {number} その要素のline-height（デフォルト値:$lh）
- */
-@function autoSpace($num:0, $fz:$fz, $lh:$lh){
-  //px変換し、単位を除く値のみを取得
-  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  @return $num - (($lh * $fzValue - $fzValue)/2) + px;
-}
-
-@function sp_autoSpace($num:0, $fz:$sp_fz, $lh:$sp_lh){
-  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  @return $num - (($lh * $fzValue - $fzValue)/2) + px;
-}
-
-
-/**
- * 後続要素がテキストの場合、autoSpaceの代わりにこちらを使用します。
- * @num {number} autoSpaceと同様
- * @fz {string} autoSpaceと同様
- * @fz2 {string} 後続要素のfont-size
- * @lh {number} autoSpaceと同様
- * @lh2 {number} 後続要素のline-height
- */
-@function autoSpace2($num:0, $fz:$fz, $fz2:$fz, $lh:$lh, $lh2:$lh){
-  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  $autoSpaceValue: $num - (($lh * $fzValue - $fzValue)/2);
-
-  $fz2Value: ($fz2 / ((floor($fz2) * 2) % 2 + 1)) * 10;
-  $nextHalfLineHeight: (($fz2Value * $lh2) - $fz2Value) / 2;
-
-  @return $autoSpaceValue - $nextHalfLineHeight + px;
-}
-
-@function sp_autoSpace2($num:0, $fz:$sp_fz, $fz2:$sp_fz, $lh:$sp_lh, $lh2:$sp_lh){
-  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  $autoSpaceValue: $num - (($lh * $fzValue - $fzValue)/2);
-
-  $fz2Value: ($fz2 / ((floor($fz2) * 2) % 2 + 1)) * 10;
-  $nextHalfLineHeight: (($fz2Value * $lh2) - $fz2Value) / 2;
-
-  @return $autoSpaceValue - $nextHalfLineHeight + px;
-}
-
-
-/**
- * Half leadingを算出します。
- * @fz {string} その要素のfont-size（デフォルト値:$fz）
- * @lh {number} その要素のline-height（デフォルト値:$lh）
- */
-@function halfLeading($fz:$fz, $lh:$lh){
-  $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  @return (($fz * $lh) - $fz) / 2 + px;
 }

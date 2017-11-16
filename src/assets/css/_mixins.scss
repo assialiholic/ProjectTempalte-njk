@@ -2,17 +2,6 @@
 // Mixins
 // -------------------------------------------------------------------
 
-// Hover&Active
-// -------------------------------------------------------------------
-@mixin FHA() {
-  #{&}:focus,
-  #{&}:hover,
-  #{&}:active{
-    @content;
-  }
-}
-
-
 // MediaQuaries
 // -------------------------------------------------------------------
 @mixin MQ($breakpoint) {
@@ -21,62 +10,12 @@
       @content;
     }
 } @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-    + "Please make sure it is defined in `$breakpoints` map.";
+    @warn "`#{$breakpoint}` is undefined";
   }
 }
 
 // Layouts
 // -------------------------------------------------------------------
-@mixin contentCentering(){
-  max-width: $contWidth;
-  padding-right: $contSpace;
-  padding-left: $contSpace;
-  margin-right: auto;
-  margin-left: auto;
-  @include MQ(md) {
-    max-width: 100%;
-  }
-}
-
-// Text
-// -------------------------------------------------------------------
-@mixin basicTxt($lh: $lh){
-  color: $txtColor;
-  font-family: $ff__sans;
-  font-size: $fz;
-  font-weight: $fw;
-  line-height: $lh;
-  @include MQ(md){
-    font-size: $sp_fz;
-    line-height: $sp_lh;
-  }
-}
-
-@mixin lastPR0(){
-  > *:last-child {
-    padding-right: 0!important;
-  }
-}
-
-@mixin lastPB0(){
-  > *:last-child {
-    padding-bottom: 0!important;
-  }
-}
-
-@mixin lastMR0(){
-  > *:last-child {
-    margin-right: 0!important;
-  }
-}
-
-@mixin lastMB0(){
-  > *:last-child {
-    margin-bottom: 0!important;
-  }
-}
-
 
 @mixin childCol($col:0, $gutter:0, $mq:true){
   $width: (100/$col);
@@ -103,7 +42,7 @@
 
 
 @mixin chilidCol__inline($display, $clearFloat:false){
-  letter-spacing: -.28em;
+  letter-spacing: -.55rem;
   text-align: left;
 
   .gr_col{
@@ -117,20 +56,17 @@
 }
 
 @mixin chilidCol__float(){
+  &::before,
+  &::after {
+    content: ' ';
+    display: table;
+  }
+  &::after {
+    clear: both;
+  }
+
   .gr_col{
-    *zoom: 1;
-
-    &::before,
-    &::after {
-      content: ' ';
-      display: table;
-    }
-    &::after {
-      clear: both;
-    }
-
-    .gr_col{
-      float: left;
-    }
+    float: left;
+    display: block;
   }
 }

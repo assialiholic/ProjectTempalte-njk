@@ -12,6 +12,7 @@ input[type="color"]::-webkit-color-swatch {
 input[type="color"]::-webkit-color-swatch-wrapper {
   padding: 0;
 }
+
 /*
 html5doctor.com Reset Stylesheet
 v1.6.1
@@ -127,106 +128,16 @@ ul, ol {
 /* ==========================================================================
    end of css-wipe
    ========================================================================== */
-
 html{
   font-size: 62.5%;
 }
 
-body{
-  padding-top: 136px;
-  @include basicTxt();
-  word-wrap: break-word;
-  @include MQ(md){
-    padding-top: 71px;
-  }
-}
-
-a{
-  transition: $transSpeed;
-  word-break: break-all;
-  color: $themeColor;
-  text-decoration: none;
-  cursor: pointer;
-  > img,
-  > i{
-    transition: $transSpeed;
-  }
-
-  &:visited{
-    color: $txtColor;
-  }
-
-  @include FHA(){
-    text-decoration: underline;
-    > img,
-    > i{
-      opacity: $hoverOpacity;
-    }
-  }
-}
-
-a[href^=tel]{
-  color: currentColor;
+body {
+  font-size: 1.6rem;
 }
 
 img{
   max-width: 100%;
   height: auto;
-  width: 100%;
   vertical-align: top;
-}
-
-p{
-  margin-bottom: autoSpace(35);
-}
-
-b,
-strong{
-  font-weight: $fw__bold;
-}
-
-select::-ms-expand {
-    display: none;
-}
-
-input,
-button,
-textarea,
-select {
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  border-radius: 0;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  font-family : inherit;
-  font-size : 100%;
-}
-
-button{
-  cursor: pointer;
-  transition: $transSpeed;
-  @include FHA(){
-    opacity: $hoverOpacity;
-  }
-}
-
-sub,
-sup {
-  font-weight: inherit;
-  line-height: inherit;
-  position: static;
-}
-sub {
-  font-size: smaller;
-  bottom: 0;
-  vertical-align: sub;
-}
-sup {
-  font-size: smaller;
-  top: 0;
-  vertical-align: super;
 }
