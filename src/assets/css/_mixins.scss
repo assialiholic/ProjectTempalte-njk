@@ -80,10 +80,17 @@
 
 @mixin childCol($col:0, $gutter:0, $mq:true){
   $width: (100/$col);
-  $gutterPercent: percentToCont($gutter);
-  width: round-decimal(($width - ($gutterPercent * ($col - 1) / $col)), 3);
-  &:nth-of-type(#{$col}n){
-    margin-right: 0;
+  @if unit($gutter) == '%'{
+    width: round-decimal(($width - ($gutter * ($col - 1) / $col)), 3);
+    &:nth-of-type(#{$col}n){
+      margin-right: 0;
+    }
+  } @else {
+    $magicNumber: $gutter * ($col - 1) / $col;
+    width: calc(#{$width}% - #{addPxUnit($magicNumber)});
+    &:nth-of-type(#{$col}n){
+      margin-right: 0;
+    }
   }
 
   @if $mq{

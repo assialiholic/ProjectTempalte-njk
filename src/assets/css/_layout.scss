@@ -77,11 +77,105 @@ a {
 
 .gr_wrapper {
   $wrp: '.gr_wrapper';
-  $gutter: 40;
-  $columnNum: 12;
-  $layoutStyle: flex; //inline-table or inline-table or float or flex
+  $gutterValues:(
+    xNarrow:(
+      pc: 10,
+      sp: 5
+    ),
+    narrow:(
+      pc: 20,
+      sp: 10
+    ),
+    default:(
+      pc: 40,
+      sp: 20
+    ),
+    wide:(
+      pc: 60,
+      sp: 30
+    ),
+    xWide:(
+      pc: 80,
+      sp: 40
+    )
+  );
+  $horizPercentageGutter: false;
+  $vertPercentageGutter: false;
+  $maxColumnNum: 12;
+  $layoutStyle: 'inline-table'; //inline-table or inline-table or float or flex(flex is beta)
 
-  margin-top: - percentToCont($gutter);
+  @if $horizPercentageGutter{
+    $horizGutter: percentToCont(map-get(map-get($gutterValues, default), pc)) !global;
+    $horizSpGutter: percentToCont(map-get(map-get($gutterValues, default), sp), $breakpoint) !global;
+  } @else {
+    $horizGutter: map-get(map-get($gutterValues, default), pc) !global;
+    $horizSpGutter: map-get(map-get($gutterValues, default), sp) !global;
+  }
+  @if $vertPercentageGutter{
+    $vertGutter: percentToCont(map-get(map-get($gutterValues, default), pc)) !global;
+    $vertSpGutter: percentToCont(map-get(map-get($gutterValues, default), sp), $breakpoint) !global;
+  } @else {
+    $vertGutter: map-get(map-get($gutterValues, default), pc) !global;
+    $vertSpGutter: map-get(map-get($gutterValues, default), sp) !global;
+  }
+
+  @each $size, $viewports in $gutterValues{
+    @if $size != 'default'{
+
+      @if $horizPercentageGutter{
+        $thisHorizPc: percentToCont(map-get(map-get($gutterValues, #{$size}), pc)) !global;
+        $thisHorizSp: percentToCont(map-get(map-get($gutterValues, #{$size}), sp)) !global;
+      } @else {
+        $thisHorizPc: map-get(map-get($gutterValues, #{$size}), pc) !global;
+        $thisHorizSp: map-get(map-get($gutterValues, #{$size}), sp) !global;
+      }
+      @if $vertPercentageGutter{
+        $thisVertPc: percentToCont(map-get(map-get($gutterValues, #{$size}), pc)) !global;
+        $thisVertSp: percentToCont(map-get(map-get($gutterValues, #{$size}), sp)) !global;
+      } @else {
+        $thisVertPc: map-get(map-get($gutterValues, #{$size}), pc) !global;
+        $thisVertSp: map-get(map-get($gutterValues, #{$size}), sp) !global;
+      }
+
+      &#{$wrp}__#{$size}{
+        margin-top: -#{addPxUnit($thisVertPc)};
+        @include MQ(md){
+          margin-top: -#{addPxUnit($thisVertSp)};
+        }
+
+        .gr_col{
+          width: 80%;
+          margin-top: addPxUnit($thisVertPc);
+          margin-right: addPxUnit($thisHorizPc);
+          @include MQ(md){
+            margin-top: addPxUnit($thisVertSp);
+            margin-right: addPxUnit($thisHorizSp);
+          }
+        }
+
+        @for $i from 2 through $maxColumnNum{
+          &#{$wrp}__col#{$i}{
+            .gr_col{
+              @include childCol($i, $thisHorizPc);
+            }
+
+            @for $j from 2 through $maxColumnNum{
+              &#{$wrp}__spCol#{$j}{
+                @include MQ(md){
+                  .gr_col{
+                    @include childCol($j, $thisHorizSp, false);
+                    margin-right: addPxUnit($thisHorizSp);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  margin-top: - addPxUnit($vertGutter);
 
   @if $layoutStyle != 'flex'{
     @if $layoutStyle == 'float' {
@@ -105,22 +199,26 @@ a {
     }
 
     .gr_col{
-      margin-right: percentToCont($gutter);
-      margin-top: percentToCont($gutter);
+      margin-top: addPxUnit($vertGutter);
+      margin-right: addPxUnit($horizGutter);
+      @include MQ(md){
+        margin-top: addPxUnit($vertSpGutter);
+        margin-right: addPxUnit($horizSpGutter);
+      }
     }
 
-    @for $i from 2 through $columnNum{
+    @for $i from 2 through $maxColumnNum{
       &#{$wrp}__col#{$i}{
         .gr_col{
-          @include childCol($i, $gutter);
+          @include childCol($i, $horizGutter);
         }
 
-        @for $j from 2 through $columnNum{
-          &#{$wrp}__col#{$i}#{$wrp}__spCol#{$j}{
+        @for $j from 2 through $maxColumnNum{
+          &#{$wrp}__spCol#{$j}{
             @include MQ(md){
               .gr_col{
-                @include childCol($j, $gutter, false);
-                margin-right: percentToCont($gutter);
+                @include childCol($j, $horizSpGutter, false);
+                margin-right: addPxUnit($horizSpGutter);
               }
             }
           }
@@ -144,10 +242,6 @@ a {
 }
 
 
-
-
-
-
 .flex {
   $wrp: '.flex';
   display: flex;
@@ -163,18 +257,8 @@ a {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.gr_col:hover{
+  -webkit-box-shadow: 0 0 20px #aaa;
+  -moz-box-shadow: 0 0 20px #aaa;
+  box-shadow: 0 0 20px #aaa;
+}
