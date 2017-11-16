@@ -1,15 +1,3 @@
-.ly_body {
-  max-width: $contWidth;
-  padding-right: $contSpace;
-  padding-left: $contSpace;
-  margin-right: auto;
-  margin-left: auto;
-  @include MQ(md) {
-    max-width: 100%;
-  }
-}
-
-
 /* Grid System
    ========================================================================== */
 .gr_wrapper {
