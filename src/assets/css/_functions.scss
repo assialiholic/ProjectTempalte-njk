@@ -1,8 +1,35 @@
+
+@function removeUnit($value){
+  @if(type_of($value) == 'string'){
+    //@return #{$value} - unit($value);
+    //@return abs($value);
+    $fuga: 10px;
+    $hoge: $value / $value;
+    @return type_of($hoge);
+  } @else {
+    $rawValue: (floor($value) * 2) % 2 + 1;
+    @return ($value / $rawValue);
+  }
+}
+
+
+@function addPxUnit($value){
+  @if(unit($value) == '%'){
+    @return $value;
+  } @else {
+    @return $value + px;
+  }
+}
+
+
+
+
+
+
+
+
 // Width/Height
 // -------------------------------------------------------------------
-
-
-
 @function to-fixed ($number, $digits: 0, $round: 'round') {
     $n: 1;
     // $number must be a number
