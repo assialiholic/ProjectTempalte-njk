@@ -20,6 +20,7 @@
   padding-left: $contSpace;
   margin-right: auto;
   margin-left: auto;
+
   @include MQ(md) {
     max-width: 100%;
   }

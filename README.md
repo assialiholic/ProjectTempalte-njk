@@ -51,7 +51,7 @@ a:active {
 ```scss
 .hoge {
   width: 100%
-  @include MQ(md){
+  @include MQ(sm){
     width: 50%;
   }
 }
@@ -90,7 +90,7 @@ a:active {
   font-size: $fz;
   font-weight: $fw;
   line-height: $lh;
-  @include MQ(md){
+  @include MQ(sm){
     font-size: $sp_fz;
     line-height: $sp_lh;
   }

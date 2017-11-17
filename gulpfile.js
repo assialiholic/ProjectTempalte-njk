@@ -1,12 +1,12 @@
-const gulp = require('gulp'),
-    runSequence = require('run-sequence'),
-    browserSync = require('browser-sync'),
-    through2 = require('through2'),
-    rimraf = require('rimraf'),
-    p = require('gulp-load-plugins')();
+const gulp = require('gulp');
+const runSequence = require('run-sequence');
+const browserSync = require('browser-sync');
+const rimraf = require('rimraf');
+const combineMq = require('gulp-combine-mq');
+const p = require('gulp-load-plugins')();
 
-const SRC = 'src',
-    DEST = 'public_html';
+const SRC = 'src';
+const DEST = 'demo';
 
 function plumberNotify(){
   return p.plumber({errorHandler: p.notify.onError("<%= error.message %>")});
@@ -14,28 +14,11 @@ function plumberNotify(){
 
 
 // -------------------------------------------------------------------
+// Tasks
+// -------------------------------------------------------------------
+
 // CSS
 // -------------------------------------------------------------------
-//scssファイルをcomb
-gulp.task('comb', function () {
-  return gulp.src([
-    SRC + '/**/*.scss',
-    '!src/**/_vars.scss',
-    '!src/**/_functions.scss',
-    '!src/**/_mixins.scss',
-    '!src/**/_base.scss',
-    '!src/**/_helper.scss'
-  ],{
-    base: SRC
-  })
-  .pipe(p.using())
-  .pipe(plumberNotify())
-  .pipe(p.csscomb())
-  .pipe(gulp.dest(SRC))
-});
-
-
-//sassのコンパイル
 gulp.task('sass', function () {
   return gulp.src([
     SRC + '/**/*.scss',
@@ -45,24 +28,22 @@ gulp.task('sass', function () {
   })
   .pipe(p.using())
   .pipe(plumberNotify())
-  .pipe(p.sourcemaps.init())
   .pipe(p.sass({outputStyle: 'expanded'}).on('error', p.sass.logError))
+  .pipe(p.combineMq({beautify: true}))
   .pipe(p.autoprefixer({
     browsers: ['last 2 versions', 'ie 10-11', 'iOS >= 8', 'Android >= 4.4'],
     cascade: false
   }))
-  .pipe(p.sourcemaps.write('../' + DEST))
   .pipe(gulp.dest(DEST))
 });
 
 
-//clean
+// File Management
+// -------------------------------------------------------------------
 gulp.task('clean', function (cb) {
   rimraf(DEST, cb);
 });
 
-
-//copy
 gulp.task('copy', function(){
   return gulp.src([
     SRC + '/**/*.html'
@@ -71,11 +52,8 @@ gulp.task('copy', function(){
 });
 
 
+// Environment
 // -------------------------------------------------------------------
-// コンパイル実行処理
-// -------------------------------------------------------------------
-
-//server
 gulp.task('server', function(){
   browserSync({
     server: {
@@ -85,8 +63,6 @@ gulp.task('server', function(){
   });
 });
 
-
-//watch
 gulp.task('watch', ['server'], function(){
   gulp.watch([
     SRC + '/**/*',
@@ -97,6 +73,9 @@ gulp.task('watch', ['server'], function(){
 });
 
 
+// -------------------------------------------------------------------
+// Execution
+// -------------------------------------------------------------------
 gulp.task('default', function (cb) {
   runSequence(
     'clean',
@@ -106,4 +85,3 @@ gulp.task('default', function (cb) {
     cb
   );
 });
-

@@ -42,11 +42,11 @@
     @return to-fixed($number, $digits, 'round');
 }
 
-/**
- * 親要素に対するパーセンテージを算出します。第二引数は省略すると、サイトのコンテンツ幅を参照します。
- * @num {number} その要素の横幅
- * @contWidthValue {number} 分母に入る横幅（デフォルト値:$$contWidthValue）
- */
+
+// 親要素に対するパーセンテージを算出します。第二引数は省略すると、サイトのコンテンツ幅を参照します。
+// @num {number} その要素の横幅
+// @contWidthValue {number} 分母に入る横幅（デフォルト値:$contWidthValue）
+// -------------------------------------------------------------------
 @function percentToCont($num, $contWidthValue:$contWidthValue) {
   @return ($num/$contWidthValue) * 100%;
 }
