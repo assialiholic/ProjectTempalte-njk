@@ -26,19 +26,19 @@
   );
   $horizPercentageGutter: true;
   $vertPercentageGutter: true;
-  $maxColumnNum: 12;
-  $layoutStyle: 'float'; //inline-table or inline-table or float or flex(flex is alpha)
+  $maxColumnNum: 6;
+  $layoutStyle: 'inline-table'; //inline-table or inline-table or float or flex(flex is alpha)
 
   @if $horizPercentageGutter{
     $horizGutter: percentToCont(map-get(map-get($gutterValues, default), pc)) !global;
-    $horizSpGutter: percentToCont(map-get(map-get($gutterValues, default), sp), $breakpoint) !global;
+    $horizSpGutter: percentToCont(map-get(map-get($gutterValues, default), sp), $breakpoint-md) !global;
   } @else {
     $horizGutter: map-get(map-get($gutterValues, default), pc) !global;
     $horizSpGutter: map-get(map-get($gutterValues, default), sp) !global;
   }
   @if $vertPercentageGutter{
     $vertGutter: percentToCont(map-get(map-get($gutterValues, default), pc)) !global;
-    $vertSpGutter: percentToCont(map-get(map-get($gutterValues, default), sp), $breakpoint) !global;
+    $vertSpGutter: percentToCont(map-get(map-get($gutterValues, default), sp), $breakpoint-md) !global;
   } @else {
     $vertGutter: map-get(map-get($gutterValues, default), pc) !global;
     $vertSpGutter: map-get(map-get($gutterValues, default), sp) !global;
@@ -70,7 +70,7 @@
     .gr_col{
       margin-top: addPxUnit($vertGutter);
       margin-right: addPxUnit($horizGutter);
-      @include MQ(md){
+      @include MQ(sm){
         margin-top: addPxUnit($vertSpGutter);
         margin-right: addPxUnit($horizSpGutter);
       }
@@ -84,7 +84,7 @@
 
         @for $j from 2 through $maxColumnNum{
           &#{$wrp}__spCol#{$j}{
-            @include MQ(md){
+            @include MQ(sm){
               .gr_col{
                 @include childCol($j, $horizSpGutter, false);
                 margin-right: addPxUnit($horizSpGutter);
@@ -131,7 +131,7 @@
 
       &#{$wrp}__#{$size}{
         margin-top: -#{addPxUnit($thisVertPc)};
-        @include MQ(md){
+        @include MQ(sm){
           margin-top: -#{addPxUnit($thisVertSp)};
         }
 
@@ -139,7 +139,7 @@
           width: 80%;
           margin-top: addPxUnit($thisVertPc);
           margin-right: addPxUnit($thisHorizPc);
-          @include MQ(md){
+          @include MQ(sm){
             margin-top: addPxUnit($thisVertSp);
             margin-right: addPxUnit($thisHorizSp);
           }
@@ -152,8 +152,27 @@
             }
 
             @for $j from 2 through $maxColumnNum{
-              &#{$wrp}__spCol#{$j}{
+              &#{$wrp}__tbCol#{$j}{
                 @include MQ(md){
+                  .gr_col{
+                    @include childCol($j, $thisHorizSp, false);
+                    margin-right: addPxUnit($thisHorizSp);
+                  }
+                }
+
+                @for $k from 2 through $maxColumnNum{
+                  &#{$wrp}__spCol#{$k}{
+                    @include MQ(sm){
+                      .gr_col{
+                        @include childCol($k, $thisHorizSp, false);
+                        margin-right: addPxUnit($thisHorizSp);
+                      }
+                    }
+                  }
+                }
+              }
+              &#{$wrp}__spCol#{$j}{
+                @include MQ(sm){
                   .gr_col{
                     @include childCol($j, $thisHorizSp, false);
                     margin-right: addPxUnit($thisHorizSp);

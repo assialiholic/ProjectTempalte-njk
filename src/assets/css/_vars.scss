@@ -5,7 +5,6 @@
 // General
 // -------------------------------------------------------------------
 
-$breakpoint: 750;
 $contSpaceValue: 15;
 $contSpace: $contSpaceValue + px;
 $innerContWidthValue: 1080;
@@ -15,7 +14,9 @@ $contWidth: $contWidthValue + px;
 //
 //Media-query
 //
-$breakpoints: (
-  'md': 'screen and (max-width: #{$breakpoint}px)',
-  'md__rev': 'screen and (min-width: #{$breakpoint + 1}px)',
+$breakpoint-sm: 576;
+$breakpoint-md: 768;
+$mediaQueries: (
+  'sm': 'screen and (max-width: #{$breakpoint-sm}px)',
+  'md': 'screen and (max-width: #{$breakpoint-md}px)',
 );

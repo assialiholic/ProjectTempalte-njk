@@ -5,8 +5,8 @@
 // MediaQuaries
 // -------------------------------------------------------------------
 @mixin MQ($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+  @if map-has-key($mediaQueries, $breakpoint) {
+    @media #{inspect(map-get($mediaQueries, $breakpoint))} {
       @content;
     }
 } @else {
@@ -33,7 +33,7 @@
   }
 
   @if $mq{
-    @include MQ(md){
+    @include MQ(sm){
       width: 100%;
       margin-right: 0;
     }
