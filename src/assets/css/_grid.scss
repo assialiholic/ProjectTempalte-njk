@@ -5,59 +5,143 @@
 
 
   // カスタマイズ可能変数
+  //
+  // それぞれのkeyがモディファイア名となります。
+  // * gr_wrapper__xNarrow
+  // * gr_wrapper__narrow
+  // * gr_wrapper
+  // * gr_wrapper__wide
+  // * gr_wrapper__xWide
+  //
+  // lg・md・smはそれぞれのブレークポイントに対応しており、hは横方向のガター値（horizontal）、vは縦方向のガター値（vertical）を表しています。
+  //
+  // 従って標準状態で3つのスクリーンサイズ * 5種類のガター値を標準搭載しており、かつモディファイアの名前や数、ガター値は自由にカスタマイズ可能です。
+  //
   // -------------------------------------------------------------------
   $gutterValues:(
     xNarrow:(
-      lg: 20,
-      md: 10,
-      sm: 5
+      lg:(
+        h: 20,
+        v: 10
+      ),
+      md:(
+        h: 10,
+        v: 5
+      ),
+      sm:(
+        h: 5,
+        v: 5
+      )
     ),
     narrow:(
-      lg: 40,
-      md: 20,
-      sm: 10
+      lg:(
+        h: 40,
+        v: 30
+      ),
+      md:(
+        h: 20,
+        v: 10
+      ),
+      sm:(
+        h: 10,
+        v: 5
+      )
     ),
     default:(
-      lg: 60,
-      md: 40,
-      sm: 20
+      lg:(
+        h: 60,
+        v: 50
+      ),
+      md:(
+        h: 40,
+        v: 30
+      ),
+      sm:(
+        h: 20,
+        v: 10
+      )
     ),
     wide:(
-      lg: 80,
-      md: 60,
-      sm: 30
+      lg:(
+        h: 80,
+        v: 70
+      ),
+      md:(
+        h: 60,
+        v: 50
+      ),
+      sm:(
+        h: 30,
+        v: 20
+      )
     ),
     xWide:(
-      lg: 100,
-      md: 80,
-      sm: 40
+      lg:(
+        h: 100,
+        v: 90
+      ),
+      md:(
+        h: 80,
+        v: 70
+      ),
+      sm:(
+        h: 40,
+        v: 30
+      )
     )
   );
+
+  // カスタマイズ可能変数
+  //
+  // $horizPercentageGutter・$vertPercentageGutter:
+  //   それぞれガターを%でとるかpx固定値でとるかを制御します。
+  //   残念ながらこの設定はプロジェクト全体で共通となり、モディファイアで一部だけ切り替えることはできません。
+  //   そもそもページによってガターのとり方が変わるなどあり得ないでしょう。
+  //
+  // $maxColumnNum
+  //   最大のカラム数を指定します。上限は特にありませんが、多ければ多いほどCSSの行数も増えます。
+  //   後から増やすことは可能ですが、サイト全体を把握していない限り減らすことは危険です。
+  //
+  // $layoutStyle
+  //   レイアウトに使用するスタイルを指定します。
+  //   これはあくまで標準を指定するためのものであり、いずれを指定しても常に下記のモディファイアで柔軟に上書きすることが可能です。
+  //   * gr_wrapper__float
+  //   * gr_wrapper__inlineTable
+  //   * gr_wrapper__inlineBlock
+  //   * gr_wrapper__flex
+  //
+  // -------------------------------------------------------------------
   $horizPercentageGutter: true;
-  $vertPercentageGutter: true;
+  $vertPercentageGutter: false;
   $maxColumnNum: 6;
   $layoutStyle: 'inline-table'; //float or inline-table or inline-block or flex(flex is beta)
 
 
+  // -------------------------------------------------------------------
+  //
+  // ※※以下のコードはカスタマイズを想定していません※※
+  //
+  // -------------------------------------------------------------------
+
   // pxと%の切り替え
   // -------------------------------------------------------------------
   @if $horizPercentageGutter{
-    $horizLgGtr: percentToCont(map-get(map-get($gutterValues, default), lg)) !global;
-    $horizMdGtr: percentToCont(map-get(map-get($gutterValues, default), md), $breakpoint-md) !global;
-    $horizSmGtr: percentToCont(map-get(map-get($gutterValues, default), sm), $breakpoint-sm) !global;
+    $horizLgGtr: percentToCont(map-get(map-get(map-get($gutterValues, default), lg), h)) !global;
+    $horizMdGtr: percentToCont(map-get(map-get(map-get($gutterValues, default), md), h), $breakpoint-md) !global;
+    $horizSmGtr: percentToCont(map-get(map-get(map-get($gutterValues, default), sm), h), $breakpoint-sm) !global;
   } @else {
-    $horizLgGtr: map-get(map-get($gutterValues, default), lg) !global;
-    $horizMdGtr: map-get(map-get($gutterValues, default), md) !global;
-    $horizSmGtr: map-get(map-get($gutterValues, default), sm) !global;
+    $horizLgGtr: map-get(map-get(map-get($gutterValues, default), lg), h) !global;
+    $horizMdGtr: map-get(map-get(map-get($gutterValues, default), md), h) !global;
+    $horizSmGtr: map-get(map-get(map-get($gutterValues, default), sm), h) !global;
   }
   @if $vertPercentageGutter{
-    $vertLgGtr: percentToCont(map-get(map-get($gutterValues, default), lg)) !global;
-    $vertMdGtr: percentToCont(map-get(map-get($gutterValues, default), md), $breakpoint-md) !global;
-    $vertSmGtr: percentToCont(map-get(map-get($gutterValues, default), sm), $breakpoint-sm) !global;
+    $vertLgGtr: percentToCont(map-get(map-get(map-get($gutterValues, default), lg), v)) !global;
+    $vertMdGtr: percentToCont(map-get(map-get(map-get($gutterValues, default), md), v), $breakpoint-md) !global;
+    $vertSmGtr: percentToCont(map-get(map-get(map-get($gutterValues, default), sm), v), $breakpoint-sm) !global;
   } @else {
-    $vertLgGtr: map-get(map-get($gutterValues, default), lg) !global;
-    $vertMdGtr: map-get(map-get($gutterValues, default), md) !global;
-    $vertSmGtr: map-get(map-get($gutterValues, default), sm) !global;
+    $vertLgGtr: map-get(map-get(map-get($gutterValues, default), lg), v) !global;
+    $vertMdGtr: map-get(map-get(map-get($gutterValues, default), md), v) !global;
+    $vertSmGtr: map-get(map-get(map-get($gutterValues, default), sm), v) !global;
   }
 
 
@@ -71,7 +155,7 @@
         }
 
         @for $j from 2 through $maxColumnNum{
-          &#{$wrp}__tbCol#{$j}{
+          &#{$wrp}__mdCol#{$j}{
             @include MQ(md){
               .gr_col{
                 @include childCol($j, $horizSmGtr, false);
@@ -80,7 +164,7 @@
             }
 
             @for $k from 2 through $maxColumnNum{
-              &#{$wrp}__spCol#{$k}{
+              &#{$wrp}__smCol#{$k}{
                 @include MQ(sm){
                   .gr_col{
                     @include childCol($k, $horizSmGtr, false);
@@ -91,7 +175,7 @@
             }
           }
 
-          &#{$wrp}__spCol#{$j}{
+          &#{$wrp}__smCol#{$j}{
             @include MQ(sm){
               .gr_col{
                 @include childCol($j, $horizSmGtr, false);
@@ -139,18 +223,18 @@
   @each $size, $viewports in $gutterValues{
     @if $size != 'default'{
       @if $horizPercentageGutter{
-        $thisHorizLgGtr: percentToCont(map-get(map-get($gutterValues, #{$size}), lg)) !global;
-        $thisHorizSmGtr: percentToCont(map-get(map-get($gutterValues, #{$size}), sm), $breakpoint-sm) !global;
+        $thisHorizLgGtr: percentToCont(map-get(map-get(map-get($gutterValues, #{$size}), lg), h)) !global;
+        $thisHorizSmGtr: percentToCont(map-get(map-get(map-get($gutterValues, #{$size}), sm), h), $breakpoint-sm) !global;
       } @else {
-        $thisHorizLgGtr: map-get(map-get($gutterValues, #{$size}), lg) !global;
-        $thisHorizSmGtr: map-get(map-get($gutterValues, #{$size}), sm) !global;
+        $thisHorizLgGtr: map-get(map-get(map-get($gutterValues, #{$size}), lg), h) !global;
+        $thisHorizSmGtr: map-get(map-get(map-get($gutterValues, #{$size}), sm), h) !global;
       }
       @if $vertPercentageGutter{
-        $thisVertLgGtr: percentToCont(map-get(map-get($gutterValues, #{$size}), lg)) !global;
-        $thisVertSmGtr: percentToCont(map-get(map-get($gutterValues, #{$size}), sm), $breakpoint-sm) !global;
+        $thisVertLgGtr: percentToCont(map-get(map-get(map-get($gutterValues, #{$size}), lg), v)) !global;
+        $thisVertSmGtr: percentToCont(map-get(map-get(map-get($gutterValues, #{$size}), sm), v), $breakpoint-sm) !global;
       } @else {
-        $thisVertLgGtr: map-get(map-get($gutterValues, #{$size}), lg) !global;
-        $thisVertSmGtr: map-get(map-get($gutterValues, #{$size}), sm) !global;
+        $thisVertLgGtr: map-get(map-get(map-get($gutterValues, #{$size}), lg), v) !global;
+        $thisVertSmGtr: map-get(map-get(map-get($gutterValues, #{$size}), sm), v) !global;
       }
 
       &#{$wrp}__#{$size}{
@@ -164,8 +248,6 @@
       }
     }
   }
-
-
 
 
   // display値変更のモディファイア
