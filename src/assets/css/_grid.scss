@@ -162,6 +162,12 @@
                 margin-right: addPxUnit($horizSmGtr);
               }
             }
+            @include MQ(sm){
+              .gr_col{
+                width: 100%;
+                margin-right: 0;
+              }
+            }
 
             @for $k from 2 through $maxColumnNum{
               &#{$wrp}__smCol#{$k}{
